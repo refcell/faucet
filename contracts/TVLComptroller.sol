@@ -1,6 +1,6 @@
 // contracts/TVLComptroller.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.6.12;
+pragma solidity ^0.7.0;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
@@ -45,7 +45,7 @@ contract TVLComptroller is Initializable, OwnableUpgradeable {
         if (erc20Contract == address(0)) {
             uint256 balance = address(this).balance;
             require(balance >= 0, "No balance available to withdraw.");
-            (bool success, ) = owner().call.value(balance)("");
+            (bool success, ) = owner().call{value: balance}("");
             require(success, "Failed to transfer ETH balance to msg.sender.");
         } else {
             IERC20Upgradeable token = IERC20Upgradeable(erc20Contract);

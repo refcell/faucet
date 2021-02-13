@@ -9,12 +9,23 @@
     "coverage": "hardhat coverage",
     "open-coverage-report": "if [ $(uname) = 'Darwin' ]; then open ./coverage/index.html; fi",
     "deploy": "hardhat deploy",
-    "verify": "hardhat verify"
+    "verify": "hardhat verify",
+    "scripts-deploy": "nodemon scripts/deploy.ts",
+    "scripts-upgrade": "nodemon scripts/upgrade.ts"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^3.3.0"
+    "@openzeppelin/contracts": "^3.4.0",
+    "@openzeppelin/contracts-upgradeable": "^3.4.0",
+    "@openzeppelin/hardhat-upgrades": "^1.6.0",
+    "fs": "^0.0.1-security",
+    "inquirer": "^7.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-typescript": "^7.12.16",
+    "@babel/register": "^7.12.13",
+    "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-etherscan": "^2.1.0",
     "@nomiclabs/hardhat-truffle5": "^2.0.0",
     "@nomiclabs/hardhat-web3": "^2.0.0",
@@ -24,6 +35,8 @@
     "@types/chai-as-promised": "^7.1.3",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.20",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-bn-equal": "^1.0.2",
@@ -33,6 +46,7 @@
     "hardhat-gas-reporter": "^1.0.4",
     "hardhat-preprocessor": "^0.1.1",
     "hardhat-typechain": "^0.3.4",
+    "nodemon": "^2.0.7",
     "solidity-coverage": "^0.7.13",
     "ts-generator": "^0.1.1",
     "ts-node": "^9.1.1",
