@@ -111,6 +111,21 @@ export interface TVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN[]>;
 
+  initialize: {
+    (_owner: string, txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(_owner: string, txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(
+      _owner: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _owner: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   isApprovedForAll(
     account: string,
     operator: string,
@@ -290,6 +305,24 @@ export interface TVLInstance extends Truffle.ContractInstance {
       ids: (number | BN | string)[],
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN[]>;
+
+    initialize: {
+      (_owner: string, txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(
+        _owner: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<void>;
+      sendTransaction(
+        _owner: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _owner: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
 
     isApprovedForAll(
       account: string,

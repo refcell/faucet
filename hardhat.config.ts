@@ -2,10 +2,10 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import "./tasks";
-// hardhat.config.js
 require('@openzeppelin/hardhat-upgrades');
 
 import { HardhatUserConfig } from "hardhat/config";
+import "@nomiclabs/hardhat-ganache";
 
 import { gweiToWei } from "./utils";
 
@@ -16,9 +16,14 @@ import "@nomiclabs/hardhat-truffle5";
 import "hardhat-typechain";
 import "hardhat-gas-reporter";
 import { removeConsoleLog } from "hardhat-preprocessor";
+const { alchemyApiKey, mnemonic } = require('./secrets.json');
 
 const config: HardhatUserConfig = {
   networks: {
+    // development: {
+    //   url: "http://127.0.0.1:8545",
+    //   accounts: process.env.DEV_PRIVATE_KEY ? [process.env.DEV_PRIVATE_KEY] : undefined,
+    // },
     kovan: {
       url: "https://kovan.infura.io/v3/" + process.env.INFURA_KEY,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
@@ -27,6 +32,10 @@ const config: HardhatUserConfig = {
     ropsten: {
       url: "https://ropsten.infura.io/v3/" + process.env.INFURA_KEY,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
+    },
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKey}`,
+      accounts: {mnemonic: mnemonic}
     },
 
     mainnet: {

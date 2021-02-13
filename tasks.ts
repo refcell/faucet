@@ -8,9 +8,7 @@ function sleep(ms: number) {
 
 function importantLog(msg: any) {
     console.log();
-    console.log();
     console.log(msg);
-    console.log();
     console.log();
 }
 

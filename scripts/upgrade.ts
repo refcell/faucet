@@ -1,8 +1,9 @@
-const { ethers, upgrades } = require("hardhat");
+// @ts-ignore
+let { ethers, upgrades } = require("hardhat");
 const inquirer = require("inquirer")
 const fs = require('fs');
 
-async function main(address, new_contract) {
+async function upgrade_main(address, new_contract) {
     // * Upgrading
     const upgraded_contract = await ethers.getContractFactory(new_contract);
     await upgrades.upgradeProxy(address, upgraded_contract);
@@ -27,6 +28,6 @@ fs.readdir("./contracts/", (err, files) => {
             },
         ])
         .then((answer) => {
-            main(answer.address, answer.contract);
+            upgrade_main(answer.address, answer.contract);
         });
 });
