@@ -25,7 +25,7 @@ declare const web3: Web3;
 declare const artifacts: Truffle.Artifacts;
 
 /**
- * Global contract function
+ * Global contract functiond
  */
 interface ContractFunction extends Mocha.SuiteFunction {
   (
