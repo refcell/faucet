@@ -23,6 +23,11 @@ contract TVL is ERC1155 {
     /// @dev hollow constructor with metadata api
     constructor() public ERC1155("https://game.example/api/item/{id}.json") {}
 
+    modifier onlyOwner() {
+        require(msg.sender == owner());
+        _;
+    }
+
     /// @dev function to mint items, only allowed for devs, external
     /// @param uint256
     /// @param uint256
