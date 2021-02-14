@@ -16,7 +16,6 @@ import "@nomiclabs/hardhat-truffle5";
 import "hardhat-typechain";
 import "hardhat-gas-reporter";
 import { removeConsoleLog } from "hardhat-preprocessor";
-const { alchemyApiKey, mnemonic } = require('./secrets.json');
 
 const config: HardhatUserConfig = {
   networks: {
@@ -34,10 +33,9 @@ const config: HardhatUserConfig = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
     },
     rinkeby: {
-      url: `https://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKey}`,
-      accounts: {mnemonic: mnemonic}
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY ? process.env.ALCHEMY_API_KEY : ""}`,
+      accounts: {mnemonic: process.env.ALCHEMY_API_MNEMONIC ? process.env.ALCHEMY_API_MNEMONIC : ""}
     },
-
     mainnet: {
       url: "https://mainnet.infura.io/v3/" + process.env.INFURA_KEY,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
