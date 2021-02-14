@@ -3,10 +3,8 @@ let { ethers, upgrades } = require("hardhat");
 
 async function deploy_tvl_main() {
     // * Deploying
-    const TVL = await ethers.getContractFactory("TVL");
-    console.log("Deploying TVL with Migrations Proxy")
-    const instance = await upgrades.deployProxy(TVL, [1]);
-    console.log("TVL deployed to:", instance);
+    const EthPoolTVL = await ethers.getContractFactory("EthPoolTVL");
+    const instance = await upgrades.deployProxy(EthPoolTVL, [1]);
     await instance.deployed();
 }
 

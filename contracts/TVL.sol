@@ -14,14 +14,11 @@ import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155PausableUpgrade
 ///      Access to allow pool creators to
 ///      distribute NFT rewards
 /// ---------------------------------------
-contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
+abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     using SafeMathUpgradeable for uint256;
 
-    // RariFundManager private ethPoolInstance;
-    // address private ethPoolAddress = 0xD6e194aF3d9674b62D1b30Ec676030C23961275e;
-
-    /// @dev load metadata api and fetch eth_pool balance
-    function initialize(address _owner) public initializer {
+    /// @dev load metadata api and instantiate ownership
+    function initialize(address _owner) public virtual initializer {
         // ERC1155PausableUpgradeable("http://test.com");
         __Ownable_init();
         transferOwnership(_owner);
