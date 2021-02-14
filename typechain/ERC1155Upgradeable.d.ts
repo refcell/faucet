@@ -5,8 +5,9 @@
 import BN from "bn.js";
 import { EventData, PastEventOptions } from "web3-eth-contract";
 
-export interface TVLContract extends Truffle.Contract<TVLInstance> {
-  "new"(meta?: Truffle.TransactionDetails): Promise<TVLInstance>;
+export interface ERC1155UpgradeableContract
+  extends Truffle.Contract<ERC1155UpgradeableInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<ERC1155UpgradeableInstance>;
 }
 
 export interface ApprovalForAll {
@@ -18,24 +19,6 @@ export interface ApprovalForAll {
     0: string;
     1: string;
     2: boolean;
-  };
-}
-
-export interface OwnershipTransferred {
-  name: "OwnershipTransferred";
-  args: {
-    previousOwner: string;
-    newOwner: string;
-    0: string;
-    1: string;
-  };
-}
-
-export interface Paused {
-  name: "Paused";
-  args: {
-    account: string;
-    0: string;
   };
 }
 
@@ -81,24 +64,9 @@ export interface URI {
   };
 }
 
-export interface Unpaused {
-  name: "Unpaused";
-  args: {
-    account: string;
-    0: string;
-  };
-}
+type AllEvents = ApprovalForAll | TransferBatch | TransferSingle | URI;
 
-type AllEvents =
-  | ApprovalForAll
-  | OwnershipTransferred
-  | Paused
-  | TransferBatch
-  | TransferSingle
-  | URI
-  | Unpaused;
-
-export interface TVLInstance extends Truffle.ContractInstance {
+export interface ERC1155UpgradeableInstance extends Truffle.ContractInstance {
   balanceOf(
     account: string,
     id: number | BN | string,
@@ -111,66 +79,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN[]>;
 
-  initialize: {
-    (_owner: string, txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse<AllEvents>
-    >;
-    call(_owner: string, txDetails?: Truffle.TransactionDetails): Promise<void>;
-    sendTransaction(
-      _owner: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _owner: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
   isApprovedForAll(
     account: string,
     operator: string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
-
-  mint_item: {
-    (
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse<AllEvents>>;
-    call(
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<BN>;
-    sendTransaction(
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
-  owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
-
-  paused(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
-
-  renounceOwnership: {
-    (txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse<AllEvents>
-    >;
-    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
-    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
-    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
-  };
 
   safeBatchTransferFrom: {
     (
@@ -270,24 +183,6 @@ export interface TVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
-  transferOwnership: {
-    (newOwner: string, txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse<AllEvents>
-    >;
-    call(
-      newOwner: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      newOwner: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      newOwner: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
   uri(
     arg0: number | BN | string,
     txDetails?: Truffle.TransactionDetails
@@ -306,69 +201,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN[]>;
 
-    initialize: {
-      (_owner: string, txDetails?: Truffle.TransactionDetails): Promise<
-        Truffle.TransactionResponse<AllEvents>
-      >;
-      call(
-        _owner: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<void>;
-      sendTransaction(
-        _owner: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<string>;
-      estimateGas(
-        _owner: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<number>;
-    };
-
     isApprovedForAll(
       account: string,
       operator: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
-
-    mint_item: {
-      (
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<Truffle.TransactionResponse<AllEvents>>;
-      call(
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<BN>;
-      sendTransaction(
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<string>;
-      estimateGas(
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<number>;
-    };
-
-    owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
-
-    paused(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
-
-    renounceOwnership: {
-      (txDetails?: Truffle.TransactionDetails): Promise<
-        Truffle.TransactionResponse<AllEvents>
-      >;
-      call(txDetails?: Truffle.TransactionDetails): Promise<void>;
-      sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
-      estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
-    };
 
     safeBatchTransferFrom: {
       (
@@ -467,24 +304,6 @@ export interface TVLInstance extends Truffle.ContractInstance {
       interfaceId: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
-
-    transferOwnership: {
-      (newOwner: string, txDetails?: Truffle.TransactionDetails): Promise<
-        Truffle.TransactionResponse<AllEvents>
-      >;
-      call(
-        newOwner: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<void>;
-      sendTransaction(
-        newOwner: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<string>;
-      estimateGas(
-        newOwner: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<number>;
-    };
 
     uri(
       arg0: number | BN | string,
