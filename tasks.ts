@@ -36,7 +36,7 @@ function retryOperation(operation: () => any, delay: number, retries: number) {
     });
 }
 
-task("deploy", "Deploys a TVL contract.")
+task("deploy", "Deploys all TVL implemented contracts.")
     .addOptionalParam(
         "deployMainnet",
         "You must pass this flag if the network you are trying to deploy to is mainnet.",
@@ -65,24 +65,23 @@ task("deploy", "Deploys a TVL contract.")
         return;
         }
 
-        const TVL: TVLContract = hre.artifacts.require("TVL");
-
+        const EthPoolTVL: TVLContract = hre.artifacts.require("EthPoolTVL");
         const constructorArgs: [] = [];
 
         importantLog(
-            "Deploying a TVL with " +
+            "Deploying an EthPoolTVL with " +
             constructorArgs.join(", ") +
             " on " +
             hre.network.name
         );
 
-        const tvl = await TVL.new(...constructorArgs);
+        const eth_pool_tvl = await EthPoolTVL.new(...constructorArgs);
         let owner: any = process.env.DEV_PUBLIC_KEY ? process.env.DEV_PUBLIC_KEY : 0xd0ab35655E883Af9cD3fa164561C8aD93d427a62
-        tvl.initialize(owner);
+        eth_pool_tvl.initialize(owner);
 
         if(hre.network.name == "localhost" || hre.network.name == "development") {
             importantLog(
-            `Deployed a TVL instance at ${tvl.address} on ${hre.network.name}!`
+            `Deployed an Eth Pool TVL instance at ${eth_pool_tvl.address} on ${hre.network.name}!`
             );
         } else {
             importantLog("Deployed! Trying to verify in 10 seconds!");
@@ -95,7 +94,7 @@ task("deploy", "Deploys a TVL contract.")
             () =>
                 hre.run("verify", {
                 network: hre.network.name,
-                address: tvl.address,
+                address: eth_pool_tvl.address,
                 constructorArguments: constructorArgs,
                 }),
             10000,
@@ -103,7 +102,7 @@ task("deploy", "Deploys a TVL contract.")
             );
 
             importantLog(
-            `Deployed a TVL instance at ${tvl.address} on ${hre.network.name}!`
+            `Deployed an Eth Pool TVL instance at ${eth_pool_tvl.address} on ${hre.network.name}!`
             );
         }
     }

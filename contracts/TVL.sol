@@ -14,11 +14,11 @@ import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155PausableUpgrade
 ///      Access to allow pool creators to
 ///      distribute NFT rewards
 /// ---------------------------------------
-contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
+abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     using SafeMathUpgradeable for uint256;
 
     /// @dev load metadata api and instantiate ownership
-    function initialize(address _owner) public initializer {
+    function initialize(address _owner) public virtual initializer {
         // ERC1155PausableUpgradeable("http://test.com");
         __Ownable_init();
         transferOwnership(_owner);

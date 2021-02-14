@@ -1,8 +1,9 @@
+// @ts-nocheck
+require('@openzeppelin/hardhat-upgrades');
 import * as dotenv from "dotenv";
 dotenv.config();
 
 import "./tasks";
-require('@openzeppelin/hardhat-upgrades');
 
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-ganache";

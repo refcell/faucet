@@ -13,6 +13,8 @@ import { IERC1155UpgradeableContract } from "./IERC1155Upgradeable";
 import { ERC20UpgradeableContract } from "./ERC20Upgradeable";
 import { IERC20UpgradeableContract } from "./IERC20Upgradeable";
 import { PausableUpgradeableContract } from "./PausableUpgradeable";
+import { EthPoolTVLContract } from "./EthPoolTVL";
+import { IRariFundManagerContract } from "./IRariFundManager";
 import { MigrationsContract } from "./Migrations";
 import { TVLContract } from "./TVL";
 import { TVLComptrollerContract } from "./TVLComptroller";
@@ -37,6 +39,8 @@ declare global {
       require(name: "ERC20Upgradeable"): ERC20UpgradeableContract;
       require(name: "IERC20Upgradeable"): IERC20UpgradeableContract;
       require(name: "PausableUpgradeable"): PausableUpgradeableContract;
+      require(name: "EthPoolTVL"): EthPoolTVLContract;
+      require(name: "IRariFundManager"): IRariFundManagerContract;
       require(name: "Migrations"): MigrationsContract;
       require(name: "TVL"): TVLContract;
       require(name: "TVLComptroller"): TVLComptrollerContract;
@@ -88,6 +92,11 @@ export {
   PausableUpgradeableContract,
   PausableUpgradeableInstance,
 } from "./PausableUpgradeable";
+export { EthPoolTVLContract, EthPoolTVLInstance } from "./EthPoolTVL";
+export {
+  IRariFundManagerContract,
+  IRariFundManagerInstance,
+} from "./IRariFundManager";
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
 export { TVLContract, TVLInstance } from "./TVL";
 export {
