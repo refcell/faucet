@@ -2,17 +2,95 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { OwnableContract } from "./Ownable";
+import { OwnableUpgradeableContract } from "./OwnableUpgradeable";
+import { ERC165UpgradeableContract } from "./ERC165Upgradeable";
+import { IERC165UpgradeableContract } from "./IERC165Upgradeable";
+import { ERC1155PausableUpgradeableContract } from "./ERC1155PausableUpgradeable";
+import { ERC1155UpgradeableContract } from "./ERC1155Upgradeable";
+import { IERC1155MetadataURIUpgradeableContract } from "./IERC1155MetadataURIUpgradeable";
+import { IERC1155ReceiverUpgradeableContract } from "./IERC1155ReceiverUpgradeable";
+import { IERC1155UpgradeableContract } from "./IERC1155Upgradeable";
+import { ERC20UpgradeableContract } from "./ERC20Upgradeable";
+import { IERC20UpgradeableContract } from "./IERC20Upgradeable";
+import { PausableUpgradeableContract } from "./PausableUpgradeable";
+import { MigrationsContract } from "./Migrations";
 import { TVLContract } from "./TVL";
+import { TVLComptrollerContract } from "./TVLComptroller";
 
 declare global {
-    namespace Truffle {
-        interface Artifacts {
-            require(name: "Ownable"): OwnableContract;
-            require(name: "TVL"): TVLContract;
-        }
+  namespace Truffle {
+    interface Artifacts {
+      require(name: "OwnableUpgradeable"): OwnableUpgradeableContract;
+      require(name: "ERC165Upgradeable"): ERC165UpgradeableContract;
+      require(name: "IERC165Upgradeable"): IERC165UpgradeableContract;
+      require(
+        name: "ERC1155PausableUpgradeable"
+      ): ERC1155PausableUpgradeableContract;
+      require(name: "ERC1155Upgradeable"): ERC1155UpgradeableContract;
+      require(
+        name: "IERC1155MetadataURIUpgradeable"
+      ): IERC1155MetadataURIUpgradeableContract;
+      require(
+        name: "IERC1155ReceiverUpgradeable"
+      ): IERC1155ReceiverUpgradeableContract;
+      require(name: "IERC1155Upgradeable"): IERC1155UpgradeableContract;
+      require(name: "ERC20Upgradeable"): ERC20UpgradeableContract;
+      require(name: "IERC20Upgradeable"): IERC20UpgradeableContract;
+      require(name: "PausableUpgradeable"): PausableUpgradeableContract;
+      require(name: "Migrations"): MigrationsContract;
+      require(name: "TVL"): TVLContract;
+      require(name: "TVLComptroller"): TVLComptrollerContract;
     }
+  }
 }
 
-export { OwnableContract, OwnableInstance } from "./Ownable";
+export {
+  OwnableUpgradeableContract,
+  OwnableUpgradeableInstance,
+} from "./OwnableUpgradeable";
+export {
+  ERC165UpgradeableContract,
+  ERC165UpgradeableInstance,
+} from "./ERC165Upgradeable";
+export {
+  IERC165UpgradeableContract,
+  IERC165UpgradeableInstance,
+} from "./IERC165Upgradeable";
+export {
+  ERC1155PausableUpgradeableContract,
+  ERC1155PausableUpgradeableInstance,
+} from "./ERC1155PausableUpgradeable";
+export {
+  ERC1155UpgradeableContract,
+  ERC1155UpgradeableInstance,
+} from "./ERC1155Upgradeable";
+export {
+  IERC1155MetadataURIUpgradeableContract,
+  IERC1155MetadataURIUpgradeableInstance,
+} from "./IERC1155MetadataURIUpgradeable";
+export {
+  IERC1155ReceiverUpgradeableContract,
+  IERC1155ReceiverUpgradeableInstance,
+} from "./IERC1155ReceiverUpgradeable";
+export {
+  IERC1155UpgradeableContract,
+  IERC1155UpgradeableInstance,
+} from "./IERC1155Upgradeable";
+export {
+  ERC20UpgradeableContract,
+  ERC20UpgradeableInstance,
+} from "./ERC20Upgradeable";
+export {
+  IERC20UpgradeableContract,
+  IERC20UpgradeableInstance,
+} from "./IERC20Upgradeable";
+export {
+  PausableUpgradeableContract,
+  PausableUpgradeableInstance,
+} from "./PausableUpgradeable";
+export { MigrationsContract, MigrationsInstance } from "./Migrations";
 export { TVLContract, TVLInstance } from "./TVL";
+export {
+  TVLComptrollerContract,
+  TVLComptrollerInstance,
+} from "./TVLComptroller";
