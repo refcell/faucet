@@ -20,10 +20,10 @@ const { alchemyApiKey, mnemonic } = require('./secrets.json');
 
 const config: HardhatUserConfig = {
   networks: {
-    // development: {
-    //   url: "http://127.0.0.1:8545",
-    //   accounts: process.env.DEV_PRIVATE_KEY ? [process.env.DEV_PRIVATE_KEY] : undefined,
-    // },
+    development: {
+      url: "http://127.0.0.1:8545",
+      accounts: process.env.DEV_PRIVATE_KEY ? [process.env.DEV_PRIVATE_KEY] : undefined,
+    },
     kovan: {
       url: "https://kovan.infura.io/v3/" + process.env.INFURA_KEY,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
