@@ -25,9 +25,40 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     ///    ...
     /// --------------------------------------------------------
 
+    struct Tranche {
+        uint256 level;
+        uint256[] token_ids;
+        uint256[] token_amounts;
+        bool unlocked;
+    }
+
+    event TrancheCreated(
+        address from,
+        uint256 level,
+        uint256[] token_id,
+        uint256[] token_amounts,
+        bool unlocked
+    );
+
+    event TrancheDeleted(address from, uint256 level);
+
     /// @dev private mapping to map an address to which tranche that address is on
     /// @dev stores user's tranche which is an availability of tokens
-    mapping(address => uint256) private tranche_map;
+    mapping(address => uint256) private address_to_tranche;
+
+    /// @dev maps if tranche level exists
+    mapping(uint256 => bool) private tranche_exists;
+
+    /// @dev private mapping to map a tranche level to a Tranche object
+    /// @dev stores user's tranche which is an availability of tokens
+    mapping(uint256 => Tranche) private tranche_map;
+
+    event TrancheUpdate(
+        address from,
+        uint256 level,
+        uint256 id,
+        uint256 amount
+    );
 
     /// @dev load metadata api and instantiate ownership
     function initialize(address _owner, string memory uri)
@@ -68,5 +99,56 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
-    ) internal override {}
+    ) internal override {
+        // TODO: Check if user tranche level allows id and amounts to be transferred
+        // TODO: Check if user is able to redeem that much amount as user % share of pool TVL
+    }
+
+    /// @dev function to create a tranche
+    /// @param _level tranche level
+    /// @param _token_ids: token ids
+    /// @param _token_amounts: amounts of each token id
+    /// @param _unlocked: whether tranche is enabled
+    /// @return newly created tranche level
+    function create_tranche(
+        uint256 _level,
+        uint256[] memory _token_ids,
+        uint256[] memory _token_amounts,
+        bool _unlocked
+    ) external onlyOwner returns (uint256) {
+        require(tranche_exists[_level] == false, "Tranche already exists!");
+
+        // * Create new Tranche
+        Tranche memory new_tranche =
+            Tranche(_level, _token_ids, _token_amounts, _unlocked);
+        tranche_map[_level] = new_tranche;
+
+        // * EMIT Tranche Creation
+        emit TrancheCreated(
+            msg.sender,
+            _level,
+            _token_ids,
+            _token_amounts,
+            _unlocked
+        );
+        return _level;
+    }
+
+    /// @dev function to delete a tranche
+    /// @param _level tranche level
+    /// @return deleted tranche level
+    function delete_tranche(uint256 _level)
+        external
+        onlyOwner
+        returns (uint256)
+    {
+        require(tranche_exists[_level] == true, "Tranche must exist!");
+
+        // * Delete Tranche
+        delete tranche_map[_level];
+
+        // * EMIT Tranche Deletion
+        emit TrancheDeleted(msg.sender, _level);
+        return _level;
+    }
 }
