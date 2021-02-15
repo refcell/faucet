@@ -12,7 +12,7 @@ let tvl;
 contract("Deploy Eth Pool TVL NFT", (accounts) => {
   beforeEach(async () => {
     tvl = await EthPoolTVL.new({from: accounts[0]});
-    await tvl.initialize(accounts[0]);
+    await tvl.initialize(accounts[0], "https://test.com/{id}.png");
   });
 
   it("should set the right owner", async function () {
