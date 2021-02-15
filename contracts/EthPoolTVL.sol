@@ -17,8 +17,13 @@ contract EthPoolTVL is TVL {
     address private ethPoolAddress = 0xD6e194aF3d9674b62D1b30Ec676030C23961275e;
 
     /// @dev load metadata api and fetch eth_pool balance
-    function initialize(address _owner) public override(TVL) initializer {
+    function initialize(address _owner, string memory uri)
+        public
+        override(TVL)
+        initializer
+    {
         ethPoolInstance = IRariFundManager(ethPoolAddress);
+        __ERC1155_init(uri);
         __Ownable_init();
         transferOwnership(_owner);
     }

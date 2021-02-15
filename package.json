@@ -52,6 +52,7 @@
     "hardhat-gas-reporter": "^1.0.4",
     "hardhat-preprocessor": "^0.1.1",
     "hardhat-typechain": "^0.3.4",
+    "mocha": "^8.3.0",
     "nodemon": "^2.0.7",
     "solidity-coverage": "^0.7.13",
     "ts-generator": "^0.1.1",

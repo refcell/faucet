@@ -9,7 +9,7 @@ chai.use(bnChai(BN));
 
 let tvl;
 
-contract("Deploy_TVL", (accounts) => {
+contract("Deploy Eth Pool TVL NFT", (accounts) => {
   beforeEach(async () => {
     tvl = await EthPoolTVL.new({from: accounts[0]});
     await tvl.initialize(accounts[0]);

@@ -10,3 +10,4 @@ Located in ./contracts
 
 `SyntaxError: Cannot use import statement outside a module`
 Specifically for `hardhat.config.ts`
+fix is to change tsconfig.json module to commonjs from usually "es5" or "es6"
