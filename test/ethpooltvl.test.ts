@@ -1,5 +1,5 @@
 
-const TVL = artifacts.require("TVL");
+const EthPoolTVL = artifacts.require("EthPoolTVL");
 import { shouldThrow } from '../utils';
 const addr_0 = '0x0000000000000000000000000000000000000000'
 var chai = require('chai');
@@ -9,10 +9,10 @@ chai.use(bnChai(BN));
 
 let tvl;
 
-contract("Deploy_TVL", (accounts) => {
+contract("Deploy Eth Pool TVL NFT", (accounts) => {
   beforeEach(async () => {
-    tvl = await TVL.new({from: accounts[0]});
-    await tvl.initialize(accounts[0]);
+    tvl = await EthPoolTVL.new({from: accounts[0]});
+    await tvl.initialize(accounts[0], "https://test.com/{id}.png");
   });
 
   it("should set the right owner", async function () {

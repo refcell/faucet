@@ -1,21 +1,20 @@
-import * as dotenv from "dotenv";
-dotenv.config();
-
-import "./tasks";
-require('@openzeppelin/hardhat-upgrades');
-
-import { HardhatUserConfig } from "hardhat/config";
+// * Major imports and plugins
+import "@openzeppelin/hardhat-upgrades";
 import "@nomiclabs/hardhat-ganache";
-
-import { gweiToWei } from "./utils";
-
-// Plugins:
-import "solidity-coverage";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-truffle5";
+import "hardhat-gas-reporter"
+import "solidity-coverage";
 import "hardhat-typechain";
 import "hardhat-gas-reporter";
 import { removeConsoleLog } from "hardhat-preprocessor";
+import { HardhatUserConfig } from "hardhat/config";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+// * Local Imports
+import { gweiToWei } from "./utils";
+import "./tasks";
 
 const config: HardhatUserConfig = {
   networks: {
@@ -72,6 +71,7 @@ const config: HardhatUserConfig = {
     currency: "USD",
     gasPrice: parseInt(process.env.GWEI_GAS_PRICE ?? "20"),
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    enabled: (process.env.REPORT_GAS) ? true : false
   },
 };
 

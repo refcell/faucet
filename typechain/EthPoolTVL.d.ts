@@ -5,8 +5,9 @@
 import BN from "bn.js";
 import { EventData, PastEventOptions } from "web3-eth-contract";
 
-export interface TVLContract extends Truffle.Contract<TVLInstance> {
-  "new"(meta?: Truffle.TransactionDetails): Promise<TVLInstance>;
+export interface EthPoolTVLContract
+  extends Truffle.Contract<EthPoolTVLInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<EthPoolTVLInstance>;
 }
 
 export interface ApprovalForAll {
@@ -98,7 +99,7 @@ type AllEvents =
   | URI
   | Unpaused;
 
-export interface TVLInstance extends Truffle.ContractInstance {
+export interface EthPoolTVLInstance extends Truffle.ContractInstance {
   balanceOf(
     account: string,
     id: number | BN | string,
