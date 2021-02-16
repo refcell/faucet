@@ -30,6 +30,13 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         _;
     }
 
+    modifier aboveOrEqualZeroArray(uint256[] calldata _x) {
+        for (uint256 i = 0; i < _x.length; i++) {
+            require(_x[i] >= 0, "Input must be greater than or equal to zero.");
+        }
+        _;
+    }
+
     modifier trancheExists(uint256 _level) {
         require(tranche_exists[_level] == true, "Tranche must exist!");
         _;
@@ -60,6 +67,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         uint256 id,
         uint256 amount
     );
+
+    event TokenRedemption(uint256[] ids, bytes data);
 
     /// @dev private mapping to map an address to which tranche that address is on
     /// @dev stores user's tranche which is an availability of tokens
@@ -113,9 +122,32 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         uint256[] memory amounts,
         bytes memory data
     ) internal override {
-        // TODO: Check if user tranche level allows id and amounts to be transferred
-        // TODO: Check if user is able to redeem that much amount as user % share of pool TVL
+        // * Get current user tranche level
+        uint256 user_level = address_to_tranche[from];
+
+        // * Get current user tranche from level
+        Tranche memory user_tranche = tranche_map[user_level];
+
+        // * Get which ids are available to user
+        uint256[] memory user_ids = user_tranche.ids;
+
+        for (uint256 id = 0; id < user_ids.length; id++) {
+            uint256 max_amount = tranche_id_amounts[user_level][user_ids[id]];
+            // * Calculate amount user can withdraw as % of pool TVL
+            uint256 max_allowed = get_pool_share(max_amount);
+            require(
+                amounts[id] < max_allowed,
+                "Id amounts must be less than the allowed tranche amounts."
+            );
+        }
     }
+
+    /// @notice Must be implemented by children
+    /// @dev function to get the amount of pool share the user has
+    function get_pool_share(uint256 max_amount)
+        public
+        virtual
+        returns (uint256);
 
     /// @dev function to create a tranche
     /// @param _level tranche level
@@ -288,5 +320,62 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         // * EMIT Tranche Deletion
         emit TrancheDeleted(msg.sender, _level);
         return _level;
+    }
+
+    /// @dev function to redeem tokens
+    /// @param _ids tranche level
+    /// @param _data data for batch transfer
+    /// @return bool if successful
+    function redeem(uint256[] calldata _ids, bytes calldata _data)
+        external
+        aboveOrEqualZeroArray(_ids)
+        whenNotPaused()
+        returns (bool)
+    {
+        bool successful = true;
+
+        // * Get current user tranche level
+        uint256 user_level = address_to_tranche[msg.sender];
+
+        // * Get current user tranche from level
+        Tranche memory user_tranche = tranche_map[user_level];
+
+        // * Get which ids are available to user
+        uint256[] memory user_ids = user_tranche.ids;
+
+        // * Batch transfer array
+        uint256[] memory batch_ids;
+        uint256[] memory batch_amounts;
+
+        uint256 counter = 0;
+        // * Iterate over tranche ids and redeem the ones in the input array
+        for (uint256 i = 0; i < user_ids.length; i++) {
+            uint256 user_id = user_ids[i];
+            for (uint256 x = 0; x < _ids.length; x++) {
+                if (user_id == _ids[x]) {
+                    // * If this is an id to redeem, append to amounts for batch transfer
+                    batch_ids[counter] = user_id;
+                    batch_amounts[counter] = tranche_id_amounts[user_level][
+                        user_id
+                    ];
+                    counter++;
+                }
+            }
+        }
+
+        // * Batch transfer
+        safeBatchTransferFrom(
+            address(this),
+            msg.sender,
+            batch_ids,
+            batch_amounts,
+            _data
+        );
+
+        // * Emit redemption event
+        emit TokenRedemption(batch_ids, _data);
+
+        // * Returns if successful
+        return successful;
     }
 }
