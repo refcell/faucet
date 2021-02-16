@@ -2,6 +2,12 @@
 
 fungibility-agnostic and gas-efficient token contracts for gamifying TVL
 
+### How it works
+
+The TVL contract located in `./contracts/TVL.sol` is the base contract.
+
+#### TVL Functions
+
 ### Contracts
 
 Located in ./contracts

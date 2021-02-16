@@ -39,6 +39,70 @@ export interface Paused {
   };
 }
 
+export interface TokenRedemption {
+  name: "TokenRedemption";
+  args: {
+    ids: BN[];
+    data: string;
+    0: BN[];
+    1: string;
+  };
+}
+
+export interface TrancheCreated {
+  name: "TrancheCreated";
+  args: {
+    from: string;
+    level: BN;
+    ids: BN[];
+    uri: string;
+    enabled: boolean;
+    0: string;
+    1: BN;
+    2: BN[];
+    3: string;
+    4: boolean;
+  };
+}
+
+export interface TrancheDeleted {
+  name: "TrancheDeleted";
+  args: {
+    from: string;
+    level: BN;
+    0: string;
+    1: BN;
+  };
+}
+
+export interface TrancheIdAmountUpdate {
+  name: "TrancheIdAmountUpdate";
+  args: {
+    from: string;
+    level: BN;
+    id: BN;
+    amount: BN;
+    0: string;
+    1: BN;
+    2: BN;
+    3: BN;
+  };
+}
+
+export interface TrancheUpdate {
+  name: "TrancheUpdate";
+  args: {
+    from: string;
+    level: BN;
+    uri: string;
+    enabled: boolean;
+    0: string;
+    1: BN;
+    2: string;
+    3: boolean;
+  };
+}
+
 export interface TransferBatch {
   name: "TransferBatch";
   args: {
@@ -93,6 +157,11 @@ type AllEvents =
   | ApprovalForAll
   | OwnershipTransferred
   | Paused
+  | TokenRedemption
+  | TrancheCreated
+  | TrancheDeleted
+  | TrancheIdAmountUpdate
+  | TrancheUpdate
   | TransferBatch
   | TransferSingle
   | URI
@@ -111,25 +180,118 @@ export interface TVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN[]>;
 
+  create_tranche: {
+    (
+      _level: number | BN | string,
+      _ids: (number | BN | string)[],
+      _tranche_uri: string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _level: number | BN | string,
+      _ids: (number | BN | string)[],
+      _tranche_uri: string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _level: number | BN | string,
+      _ids: (number | BN | string)[],
+      _tranche_uri: string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _level: number | BN | string,
+      _ids: (number | BN | string)[],
+      _tranche_uri: string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  delete_tranche: {
+    (
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  get_pool_share: {
+    (
+      _from: string,
+      _max_amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _from: string,
+      _max_amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _from: string,
+      _max_amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _from: string,
+      _max_amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  get_tranche_enabled(
+    _level: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<boolean>;
+
+  get_tranche_id_amounts(
+    _level: number | BN | string,
+    _id: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<BN>;
+
+  get_tranche_uri(
+    _level: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
+
   initialize: {
     (
       _owner: string,
-      uri: string,
+      _uri: string,
+      _pool_address: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<Truffle.TransactionResponse<AllEvents>>;
     call(
       _owner: string,
-      uri: string,
+      _uri: string,
+      _pool_address: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<void>;
     sendTransaction(
       _owner: string,
-      uri: string,
+      _uri: string,
+      _pool_address: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
     estimateGas(
       _owner: string,
-      uri: string,
+      _uri: string,
+      _pool_address: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
@@ -142,27 +304,27 @@ export interface TVLInstance extends Truffle.ContractInstance {
 
   mint_item: {
     (
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      _uri_data: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<Truffle.TransactionResponse<AllEvents>>;
     call(
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      _uri_data: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN>;
     sendTransaction(
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      _uri_data: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
     estimateGas(
-      id: number | BN | string,
-      amount: number | BN | string,
-      data: string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      _uri_data: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
@@ -170,6 +332,29 @@ export interface TVLInstance extends Truffle.ContractInstance {
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
   paused(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+
+  redeem: {
+    (
+      _ids: (number | BN | string)[],
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _ids: (number | BN | string)[],
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+    sendTransaction(
+      _ids: (number | BN | string)[],
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _ids: (number | BN | string)[],
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
 
   renounceOwnership: {
     (txDetails?: Truffle.TransactionDetails): Promise<
@@ -273,6 +458,79 @@ export interface TVLInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
+  set_tranche_enabled: {
+    (
+      _level: number | BN | string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _level: number | BN | string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _level: number | BN | string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _level: number | BN | string,
+      _enabled: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  set_tranche_id_amounts: {
+    (
+      _level: number | BN | string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _level: number | BN | string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _level: number | BN | string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _level: number | BN | string,
+      _id: number | BN | string,
+      _amount: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  set_tranche_uri: {
+    (
+      _level: number | BN | string,
+      _uri: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _level: number | BN | string,
+      _uri: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _level: number | BN | string,
+      _uri: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _level: number | BN | string,
+      _uri: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   supportsInterface(
     interfaceId: string,
     txDetails?: Truffle.TransactionDetails
@@ -314,25 +572,118 @@ export interface TVLInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN[]>;
 
+    create_tranche: {
+      (
+        _level: number | BN | string,
+        _ids: (number | BN | string)[],
+        _tranche_uri: string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _level: number | BN | string,
+        _ids: (number | BN | string)[],
+        _tranche_uri: string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _level: number | BN | string,
+        _ids: (number | BN | string)[],
+        _tranche_uri: string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _level: number | BN | string,
+        _ids: (number | BN | string)[],
+        _tranche_uri: string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    delete_tranche: {
+      (
+        _level: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _level: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _level: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _level: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    get_pool_share: {
+      (
+        _from: string,
+        _max_amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _from: string,
+        _max_amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _from: string,
+        _max_amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _from: string,
+        _max_amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    get_tranche_enabled(
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+
+    get_tranche_id_amounts(
+      _level: number | BN | string,
+      _id: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+
+    get_tranche_uri(
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+
     initialize: {
       (
         _owner: string,
-        uri: string,
+        _uri: string,
+        _pool_address: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<Truffle.TransactionResponse<AllEvents>>;
       call(
         _owner: string,
-        uri: string,
+        _uri: string,
+        _pool_address: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<void>;
       sendTransaction(
         _owner: string,
-        uri: string,
+        _uri: string,
+        _pool_address: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<string>;
       estimateGas(
         _owner: string,
-        uri: string,
+        _uri: string,
+        _pool_address: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
@@ -345,27 +696,27 @@ export interface TVLInstance extends Truffle.ContractInstance {
 
     mint_item: {
       (
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        _uri_data: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<Truffle.TransactionResponse<AllEvents>>;
       call(
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        _uri_data: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<BN>;
       sendTransaction(
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        _uri_data: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<string>;
       estimateGas(
-        id: number | BN | string,
-        amount: number | BN | string,
-        data: string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        _uri_data: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
@@ -373,6 +724,29 @@ export interface TVLInstance extends Truffle.ContractInstance {
     owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
     paused(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+
+    redeem: {
+      (
+        _ids: (number | BN | string)[],
+        _data: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _ids: (number | BN | string)[],
+        _data: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<boolean>;
+      sendTransaction(
+        _ids: (number | BN | string)[],
+        _data: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _ids: (number | BN | string)[],
+        _data: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
 
     renounceOwnership: {
       (txDetails?: Truffle.TransactionDetails): Promise<
@@ -472,6 +846,79 @@ export interface TVLInstance extends Truffle.ContractInstance {
       estimateGas(
         operator: string,
         approved: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    set_tranche_enabled: {
+      (
+        _level: number | BN | string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _level: number | BN | string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _level: number | BN | string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _level: number | BN | string,
+        _enabled: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    set_tranche_id_amounts: {
+      (
+        _level: number | BN | string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _level: number | BN | string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _level: number | BN | string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _level: number | BN | string,
+        _id: number | BN | string,
+        _amount: number | BN | string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    set_tranche_uri: {
+      (
+        _level: number | BN | string,
+        _uri: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _level: number | BN | string,
+        _uri: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _level: number | BN | string,
+        _uri: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _level: number | BN | string,
+        _uri: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
