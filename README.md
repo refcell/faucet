@@ -6,6 +6,14 @@ fungibility-agnostic and gas-efficient token contracts for gamifying TVL
 
 Located in ./contracts
 
+### Roadmap/TODO
+
+- [x] Tranches
+- [ ] Uri substitutions
+- [ ] Token Redemptions
+- [ ] Emergency Pausing
+- [ ] Liquidations
+
 ### Noted Issues
 
 `SyntaxError: Cannot use import statement outside a module`

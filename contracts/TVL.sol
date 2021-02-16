@@ -248,10 +248,18 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         trancheExists(_level)
         returns (uint256)
     {
+        // * Iterate over Tranche struct ids, if not present we need to add
+        bool contained = false;
+        for (uint256 i = 0; i < tranche_map[_level].ids.length; i++) {
+            if (tranche_map[_level].ids[i] == _id) contained = true;
+        }
+        if (!contained) tranche_map[_level].ids.push(_id);
+
         // * Set amount of id tokens in tranche
         tranche_id_amounts[_level][_id] = _amount;
         emit TrancheIdAmountUpdate(msg.sender, _level, _id, _amount);
 
+        // * Returns tranche level of updated
         return _level;
     }
 
