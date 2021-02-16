@@ -9,6 +9,7 @@ Located in ./contracts
 ### Roadmap/TODO
 
 - [x] Tranches
+- [ ] Tranche Tests
 - [ ] Uri substitutions
 - [ ] Token Redemptions
 - [ ] Emergency Pausing
