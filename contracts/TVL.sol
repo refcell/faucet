@@ -84,13 +84,20 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     /// @dev stores user's tranche which is an availability of tokens
     mapping(uint256 => Tranche) private tranche_map;
 
+    // * Default pool address
+    address internal poolAddress;
+
     /// @dev load metadata api and instantiate ownership
-    function initialize(address _owner, string memory uri)
-        public
-        virtual
-        initializer
-    {
-        __ERC1155_init(uri);
+    /// @param _owner address of the contract owner
+    /// @param _uri base uri for initialization of erc1155
+    /// @param _pool_address address of the pool
+    function initialize(
+        address _owner,
+        string memory _uri,
+        address _pool_address
+    ) public virtual initializer {
+        poolAddress = _pool_address;
+        __ERC1155_init(_uri);
         __Ownable_init();
         transferOwnership(_owner);
     }
@@ -134,7 +141,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         for (uint256 id = 0; id < user_ids.length; id++) {
             uint256 max_amount = tranche_id_amounts[user_level][user_ids[id]];
             // * Calculate amount user can withdraw as % of pool TVL
-            uint256 max_allowed = get_pool_share(max_amount);
+            uint256 max_allowed = get_pool_share(from, max_amount);
             require(
                 amounts[id] < max_allowed,
                 "Id amounts must be less than the allowed tranche amounts."
@@ -144,7 +151,10 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
 
     /// @notice Must be implemented by children
     /// @dev function to get the amount of pool share the user has
-    function get_pool_share(uint256 max_amount)
+    /// @param _from address of the current user
+    /// @param _max_amount the amount of a given token id
+    /// @return uint256 amount of tokens to give to the user
+    function get_pool_share(address _from, uint256 _max_amount)
         public
         virtual
         returns (uint256);
@@ -337,11 +347,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         // * Get current user tranche level
         uint256 user_level = address_to_tranche[msg.sender];
 
-        // * Get current user tranche from level
-        Tranche memory user_tranche = tranche_map[user_level];
-
         // * Get which ids are available to user
-        uint256[] memory user_ids = user_tranche.ids;
+        uint256[] memory user_ids = tranche_map[user_level].ids;
 
         // * Batch transfer array
         uint256[] memory batch_ids;

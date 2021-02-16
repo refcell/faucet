@@ -13,4 +13,11 @@ contract IRariFundManager {
      * @dev Ideally, we can add the view modifier, but Compound's `getUnderlyingBalance` function (called by `getRawFundBalance`) potentially modifies the state.
      */
     function getFundBalance() public returns (uint256) {}
+
+    /**
+     * @notice Returns an account's total balance in ETH.
+     * @dev Ideally, we can add the view modifier, but Compound's `getUnderlyingBalance` function (called by `getRawFundBalance`) potentially modifies the state.
+     * @param account The account whose balance we are calculating.
+     */
+    function balanceOf(address account) external returns (uint256) {}
 }

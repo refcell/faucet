@@ -13,6 +13,21 @@ export interface IRariFundManagerContract
 type AllEvents = never;
 
 export interface IRariFundManagerInstance extends Truffle.ContractInstance {
+  balanceOf: {
+    (account: string, txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(account: string, txDetails?: Truffle.TransactionDetails): Promise<BN>;
+    sendTransaction(
+      account: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      account: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   getFundBalance: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -23,6 +38,24 @@ export interface IRariFundManagerInstance extends Truffle.ContractInstance {
   };
 
   methods: {
+    balanceOf: {
+      (account: string, txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(
+        account: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        account: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        account: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
     getFundBalance: {
       (txDetails?: Truffle.TransactionDetails): Promise<
         Truffle.TransactionResponse<AllEvents>
