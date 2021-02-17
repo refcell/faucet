@@ -25,14 +25,14 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     ///    ...
     /// --------------------------------------------------------
 
-    modifier aboveOrEqualZero(uint256 _x) {
-        require(_x >= 0, "Input must be greater than or equal to zero.");
+    modifier aboveZero(uint256 _x) {
+        require(_x > 0, "Input must be greater than zero.");
         _;
     }
 
-    modifier aboveOrEqualZeroArray(uint256[] calldata _x) {
+    modifier aboveZeroArray(uint256[] calldata _x) {
         for (uint256 i = 0; i < _x.length; i++) {
-            require(_x[i] >= 0, "Input must be greater than or equal to zero.");
+            require(_x[i] > 0, "Input must be greater than zero.");
         }
         _;
     }
@@ -111,7 +111,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         uint256 _id,
         uint256 _amount,
         bytes calldata _uri_data
-    ) external onlyOwner aboveOrEqualZero(_id) returns (uint256) {
+    ) external onlyOwner aboveZero(_id) returns (uint256) {
         _mint(msg.sender, _id, _amount, _uri_data);
         return _id;
     }
@@ -197,7 +197,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     function get_tranche_uri(uint256 _level)
         external
         view
-        aboveOrEqualZero(_level)
+        aboveZero(_level)
         trancheExists(_level)
         returns (string memory)
     {
@@ -213,7 +213,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     function set_tranche_uri(uint256 _level, string memory _uri)
         external
         onlyOwner
-        aboveOrEqualZero(_level)
+        aboveZero(_level)
         trancheExists(_level)
         returns (uint256)
     {
@@ -227,7 +227,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     function get_tranche_enabled(uint256 _level)
         external
         view
-        aboveOrEqualZero(_level)
+        aboveZero(_level)
         trancheExists(_level)
         returns (bool)
     {
@@ -243,7 +243,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     function set_tranche_enabled(uint256 _level, bool _enabled)
         external
         onlyOwner
-        aboveOrEqualZero(_level)
+        aboveZero(_level)
         trancheExists(_level)
         returns (uint256)
     {
@@ -263,8 +263,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     function get_tranche_id_amounts(uint256 _level, uint256 _id)
         external
         view
-        aboveOrEqualZero(_level)
-        aboveOrEqualZero(_id)
+        aboveZero(_level)
+        aboveZero(_id)
         trancheExists(_level)
         returns (uint256)
     {
@@ -284,9 +284,9 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     )
         external
         onlyOwner
-        aboveOrEqualZero(_level)
-        aboveOrEqualZero(_id)
-        aboveOrEqualZero(_amount)
+        aboveZero(_level)
+        aboveZero(_id)
+        aboveZero(_amount)
         trancheExists(_level)
         returns (uint256)
     {
@@ -311,7 +311,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     function delete_tranche(uint256 _level)
         external
         onlyOwner
-        aboveOrEqualZero(_level)
+        aboveZero(_level)
         trancheExists(_level)
         returns (uint256)
     {
@@ -338,7 +338,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     /// @return bool if successful
     function redeem(uint256[] calldata _ids, bytes calldata _data)
         external
-        aboveOrEqualZeroArray(_ids)
+        aboveZeroArray(_ids)
         whenNotPaused()
         returns (bool)
     {
