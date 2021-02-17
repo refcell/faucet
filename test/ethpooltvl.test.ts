@@ -99,22 +99,198 @@ contract("Deploy Eth Pool TVL NFT", (accounts) => {
   });
 
   it("owner should be able to set tranche uri", async () => {
+    // * Expect uninitialized tranche get enabled to fail
+    await shouldThrow(tvl.set_tranche_uri.call(1, standard_uri, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_uri.call(1, standard_uri, {from: accounts[1]}));
+
     // * Mint token and create tranche
     await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
     await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect tranche with negative level to fail
+    await shouldThrow(tvl.set_tranche_uri.call(-1, standard_uri, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_uri.call(-1, standard_uri, {from: accounts[1]}));
 
     // * Attempt to set tranche uri from owner account
     let tranche_level = await tvl.set_tranche_uri.call(1, standard_uri, {from: accounts[0]});
     expect(tranche_level.toString()).to.equal('1');
   });
 
-  it("user should be able to set tranche uri", async () => {
+  it("user should not be able to set tranche uri", async () => {
+    // * Expect uninitialized tranche get enabled to fail
+    await shouldThrow(tvl.set_tranche_uri.call(1, standard_uri, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_uri.call(1, standard_uri, {from: accounts[1]}));
+
     // * Mint token and create tranche
     await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
     await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
 
+    // * Expect tranche with negative level to fail
+    await shouldThrow(tvl.set_tranche_uri.call(-1, standard_uri, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_uri.call(-1, standard_uri, {from: accounts[1]}));
+
     // * Attempt to set tranche uri from non-owner account
     await shouldThrow(tvl.set_tranche_uri.call(1, standard_uri, {from: accounts[1]}));
+  });
+
+  it("should be able to get if the tranche is enabled", async () => {
+    // * Expect uninitialized tranche get enabled to fail
+    await shouldThrow(tvl.get_tranche_enabled.call(1, {from: accounts[0]}));
+    await shouldThrow(tvl.get_tranche_enabled.call(1, {from: accounts[1]}));
+
+    // * Mint token and create tranche
+    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect tranche with negative level to fail
+    await shouldThrow(tvl.get_tranche_enabled.call(-1, {from: accounts[0]}));
+    await shouldThrow(tvl.get_tranche_enabled.call(-1, {from: accounts[1]}));
+
+    // * Check if tranche is enabled
+    let enabled = await tvl.get_tranche_enabled(1, {from: accounts[0]});
+    expect(enabled.toString()).to.equal('true');
+    enabled = await tvl.get_tranche_enabled(1, {from: accounts[1]});
+    expect(enabled.toString()).to.equal('true');
+  });
+
+  it("should be able to set tranche enabled", async () => {
+    // * Expect uninitialized tranche get enabled to fail
+    await shouldThrow(tvl.set_tranche_enabled.call(1, true, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_enabled.call(1, true, {from: accounts[1]}));
+
+    // * Mint token and create tranche
+    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect tranche with negative level to fail
+    await shouldThrow(tvl.set_tranche_enabled.call(-1, true, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_enabled.call(-1, true, {from: accounts[1]}));
+
+    // * Set tranche enabled from owner
+    let enabled = await tvl.set_tranche_enabled.call(1, true, {from: accounts[0]});
+    expect(enabled.toString()).to.equal('1');
+
+    // * Attempt to set tranche uri from non-owner account
+    await shouldThrow(tvl.set_tranche_enabled.call(1, true, {from: accounts[1]}));
+  });
+
+  it("should be able to get tranche id amounts", async () => {
+    // * Expect uninitialized tranche get id amounts to fail
+    await shouldThrow(tvl.get_tranche_id_amounts.call(1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.get_tranche_id_amounts.call(1, 1, {from: accounts[1]}));
+
+    // * Mint token and create tranche
+    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect tranche with negative level and id to fail
+    await shouldThrow(tvl.get_tranche_id_amounts.call(-1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.get_tranche_id_amounts.call(1, -1, {from: accounts[0]}));
+    await shouldThrow(tvl.get_tranche_id_amounts.call(-1, -1, {from: accounts[0]}));
+    await shouldThrow(tvl.get_tranche_id_amounts.call(-1, 1, {from: accounts[1]}));
+    await shouldThrow(tvl.get_tranche_id_amounts.call(1, -1, {from: accounts[1]}));
+    await shouldThrow(tvl.get_tranche_id_amounts.call(-1, -1, {from: accounts[1]}));
+
+    // * Get tranche id amounts - initialized to 0
+    let amounts = await tvl.get_tranche_id_amounts(1, 1, {from: accounts[0]});
+    expect(amounts.toString()).to.equal('0');
+    amounts = await tvl.get_tranche_id_amounts(1, 1, {from: accounts[1]});
+    expect(amounts.toString()).to.equal('0');
+  });
+
+  it("should be able to set tranche id amounts", async () => {
+    // * Expect uninitialized tranche set id amounts to fail
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, 1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, 1, 1, {from: accounts[1]}));
+
+    // * Mint token and create tranche
+    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect tranche with negative level to fail
+    await shouldThrow(tvl.set_tranche_id_amounts.call(-1, 1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, -1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, 1, -1, {from: accounts[0]}));
+    await shouldThrow(tvl.set_tranche_id_amounts.call(-1, 1, 1, {from: accounts[1]}));
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, -1, 1, {from: accounts[1]}));
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, 1, -1, {from: accounts[1]}));
+
+    // * Set tranche id amounts from owner
+    let enabled = await tvl.set_tranche_id_amounts.call(1, 1, 1, {from: accounts[0]});
+    expect(enabled.toString()).to.equal('1');
+
+    // * Attempt to set tranche id amounts from non-owner account
+    await shouldThrow(tvl.set_tranche_id_amounts.call(1, 1, 1, {from: accounts[1]}));
+  });
+
+  it("should be able to delete a tranche", async () => {
+    // * Expect uninitialized tranche deletion to fail
+    await shouldThrow(tvl.delete_tranche.call(1, {from: accounts[0]}));
+    await shouldThrow(tvl.delete_tranche.call(1, {from: accounts[1]}));
+
+    // * Mint token and create tranche
+    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect tranche with negative level to fail
+    await shouldThrow(tvl.delete_tranche.call(-1, 1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.delete_tranche.call(1, -1, 1, {from: accounts[0]}));
+    await shouldThrow(tvl.delete_tranche.call(1, 1, -1, {from: accounts[0]}));
+    await shouldThrow(tvl.delete_tranche.call(-1, 1, 1, {from: accounts[1]}));
+    await shouldThrow(tvl.delete_tranche.call(1, -1, 1, {from: accounts[1]}));
+    await shouldThrow(tvl.delete_tranche.call(1, 1, -1, {from: accounts[1]}));
+
+    // * Attempt to delete a tranche from non-owner account
+    await shouldThrow(tvl.delete_tranche.call(1, {from: accounts[1]}));
+
+    // * Delete tranche from owner
+    await tvl.delete_tranche(1, {from: accounts[0]});
+    let exists = await tvl.get_tranche_exists.call(1, {from: accounts[0]});
+    expect(exists.toString()).to.equal('false');
+  });
+
+  it("should be able to redeem tokens", async () => {
+    // * Pause contract tests
+    await shouldThrow(tvl.pause({ from: accounts[1] }));
+    await tvl.pause({ from: accounts[0] });
+    await shouldThrow(tvl.pause({ from: accounts[0] }));
+
+    // * Expect paused erc1155 to prevent redemption
+    await shouldThrow(tvl.redeem([1], "0x1234", {from: accounts[0]}));
+    await shouldThrow(tvl.redeem([1], "0x1234", {from: accounts[1]}));
+
+    // * Unpause contract tests
+    await shouldThrow(tvl.unpause({ from: accounts[1] }));
+    await tvl.unpause({ from: accounts[0] });
+    await shouldThrow(tvl.unpause({ from: accounts[0] }));
+
+    // * Mint token and create tranche
+    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Expect negative ids to prevent redemption
+    await shouldThrow(tvl.redeem([-1], "0x1234", {from: accounts[0]}));
+    await shouldThrow(tvl.redeem([-1], "0x1234", {from: accounts[1]}));
+
+    // * Expect successful redemption
+    await tvl.set_approval(accounts[1], true, { from: accounts[0] });
+    let successful = await tvl.redeem.call([1], "0x1234", {from: accounts[1]});
+    expect(successful.toString()).to.equal('true');
+  });
+
+  it("should be able to pause", async () => {
+    // * Pause contract tests
+    await shouldThrow(tvl.pause({ from: accounts[1] }));
+    await tvl.pause({ from: accounts[0] });
+    await shouldThrow(tvl.pause({ from: accounts[0] }));
+  });
+
+  it("should be able to pause", async () => {
+    // * Unpause contract tests
+    await tvl.pause({ from: accounts[0] });
+    await shouldThrow(tvl.unpause({ from: accounts[1] }));
+    await tvl.unpause({ from: accounts[0] });
+    await shouldThrow(tvl.unpause({ from: accounts[0] }));
   });
 
 });

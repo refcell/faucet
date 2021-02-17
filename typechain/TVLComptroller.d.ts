@@ -23,6 +23,11 @@ export interface OwnershipTransferred {
 type AllEvents = OwnershipTransferred;
 
 export interface TVLComptrollerInstance extends Truffle.ContractInstance {
+  c_0xdab1ed6e(
+    c__0xdab1ed6e: string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<void>;
+
   initialize: {
     (_tvl_address: string, txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -109,6 +114,11 @@ export interface TVLComptrollerInstance extends Truffle.ContractInstance {
   };
 
   methods: {
+    c_0xdab1ed6e(
+      c__0xdab1ed6e: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+
     initialize: {
       (_tvl_address: string, txDetails?: Truffle.TransactionDetails): Promise<
         Truffle.TransactionResponse<AllEvents>

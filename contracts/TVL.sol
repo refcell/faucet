@@ -386,7 +386,7 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
 
         // * Batch transfer
         safeBatchTransferFrom(
-            address(this),
+            owner(),
             msg.sender,
             batch_ids,
             batch_amounts,
@@ -399,4 +399,40 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         // * Returns if successful
         return successful;
     }
+
+    /// @dev function set approval for redemption
+    /// @param _user user's address
+    /// @param _approved whether the user is approved to transfer or not
+    function set_approval(address _user, bool _approved) external onlyOwner {
+        // * Set approval
+        setApprovalForAll(_user, _approved);
+    }
+
+    /// --------------------------------------------------------
+    ///    Pausible Function Implementations
+    /// --------------------------------------------------------
+
+    /**
+     * @dev Triggers stopped state.
+     *
+     * Requirements:
+     *
+     * - The contract must not be paused.
+     */
+    function pause() external whenNotPaused onlyOwner {
+        _pause();
+    }
+
+    /**
+     * @dev Returns to normal state.
+     *
+     * Requirements:
+     *
+     * - The contract must be paused.
+     */
+    function unpause() external whenPaused onlyOwner {
+        _unpause();
+    }
+
+    // TODO: Implement rug pull safety measure
 }
