@@ -147,6 +147,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
                 "Id amounts must be less than the allowed tranche amounts."
             );
         }
+
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
 
     /// @notice Must be implemented by children
@@ -162,8 +164,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
     /// @dev function to create a tranche
     /// @param _level tranche level
     /// @param _ids tranche token ids
-    /// @param _tranche_uri: tranche level uri
-    /// @param _enabled: whether tranche is enabled
+    /// @param _tranche_uri tranche level uri
+    /// @param _enabled whether tranche is enabled
     /// @return newly created tranche level
     function create_tranche(
         uint256 _level,
@@ -178,17 +180,29 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
             Tranche(_level, _ids, _tranche_uri, _enabled);
         tranche_map[_level] = new_tranche;
 
+        // * Set tranche exists to true
+        tranche_exists[_level] = true;
+
         // * Iterate over _ids and set amount to zero in mapping
         for (uint256 i = 0; i < _ids.length; i++) {
             tranche_id_amounts[_level][_ids[i]] = 0;
         }
 
-        // * Set tranche exists to true
-        tranche_exists[_level] = true;
-
         // * EMIT Tranche Creation
         emit TrancheCreated(msg.sender, _level, _ids, _tranche_uri, _enabled);
         return _level;
+    }
+
+    /// @dev function to check if tranche exists or not
+    /// @param _level tranche level
+    /// @return tranche uri for <_level> tranche
+    function get_tranche_exists(uint256 _level)
+        external
+        view
+        aboveZero(_level)
+        returns (bool)
+    {
+        return tranche_exists[_level];
     }
 
     /// @dev function to get a tranche uri

@@ -15,6 +15,7 @@ import { IERC20UpgradeableContract } from "./IERC20Upgradeable";
 import { PausableUpgradeableContract } from "./PausableUpgradeable";
 import { EthPoolTVLContract } from "./EthPoolTVL";
 import { IRariFundManagerContract } from "./IRariFundManager";
+import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
 import { TVLContract } from "./TVL";
 import { TVLComptrollerContract } from "./TVLComptroller";
@@ -41,6 +42,7 @@ declare global {
       require(name: "PausableUpgradeable"): PausableUpgradeableContract;
       require(name: "EthPoolTVL"): EthPoolTVLContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
+      require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
       require(name: "TVL"): TVLContract;
       require(name: "TVLComptroller"): TVLComptrollerContract;
@@ -97,6 +99,10 @@ export {
   IRariFundManagerContract,
   IRariFundManagerInstance,
 } from "./IRariFundManager";
+export {
+  IRariFundTokenContract,
+  IRariFundTokenInstance,
+} from "./IRariFundToken";
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
 export { TVLContract, TVLInstance } from "./TVL";
 export {

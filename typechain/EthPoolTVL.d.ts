@@ -261,6 +261,11 @@ export interface EthPoolTVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
+  get_tranche_exists(
+    _level: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<boolean>;
+
   get_tranche_id_amounts(
     _level: number | BN | string,
     _id: number | BN | string,
@@ -669,6 +674,11 @@ export interface EthPoolTVLInstance extends Truffle.ContractInstance {
     };
 
     get_tranche_enabled(
+      _level: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+
+    get_tranche_exists(
       _level: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
