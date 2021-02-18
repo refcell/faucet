@@ -14,12 +14,16 @@ Located in ./contracts
 
 ### Major Roadmap/TODO
 
-- [x] Tranches
-- [ ] Tranche Tests
+- [x] Basic Tranche Implementation
+- [x] Basic Tranche Tests
 - [ ] Uri substitutions
 - [ ] Token Redemptions
-- [ ] Emergency Pausing
+  - Need to ensure tokens are transferred correctly
+  - Still needs more tests
+- [x] Emergency Pausing
+  - Implemented with the Pausible functionality
 - [ ] Liquidations
+- [ ] Rug Pull Functionality
 
 ### Backlog
 
