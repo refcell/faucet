@@ -9,14 +9,18 @@ var bnChai = require('bn-chai');
 chai.use(bnChai(BN));
 
 let tvl;
+
+const rariPoolController = "0xa422890cbBE5EAa8f1c88590fBab7F319D7e24B6";
 const poolAddress = '0xD6e194aF3d9674b62D1b30Ec676030C23961275e';
 const updatedPoolAddress = '0xC6BF8C8A55f77686720E0a88e2Fd1fEEF58ddf4a';
+const user_address = '0x9C0790Eb0F96B16Ea1806e20B0D0E21A31DC93BC';
+
 const standard_uri = "https://test.com/{id}.png";
 
 contract("Deploy Eth Pool TVL NFT", (accounts) => {
   beforeEach(async () => {
     tvl = await EthPoolTVL.new({from: accounts[0]});
-    await tvl.initialize(accounts[0], standard_uri, poolAddress);
+    await tvl.initialize(accounts[0], standard_uri, rariPoolController);
   });
 
   // * ----------------------
@@ -30,7 +34,7 @@ contract("Deploy Eth Pool TVL NFT", (accounts) => {
 
   it("should be able to get the correct pool address", async () => {
     let fetched_pool_address = await tvl.get_pool_address.call({from: accounts[0]});
-    expect(fetched_pool_address).to.equal(poolAddress);
+    expect(fetched_pool_address).to.equal(rariPoolController);
   });
 
   it("should be able to set the correct pool address from the owner", async () => {
@@ -42,9 +46,9 @@ contract("Deploy Eth Pool TVL NFT", (accounts) => {
     await shouldThrow(tvl.set_pool_address.call(updatedPoolAddress, {from: accounts[1]}));
   });
 
-  // TODO: eth pool instance issue: "Error: Transaction reverted: function call to a non-contract account"
-  xit("should be able to get user pool share", async () => {
-    let share = await tvl.get_pool_share.call('0x9C0790Eb0F96B16Ea1806e20B0D0E21A31DC93BC', 1, {from: accounts[0]});
+  it("should be able to get user pool share", async () => {
+    await tvl.set_pool_address(rariPoolController, {from: accounts[0]});
+    let share = await tvl.get_pool_share.call(user_address, 1, {from: accounts[0]});
     expect(share.toString()).to.equal('0');
   });
 
@@ -265,8 +269,9 @@ contract("Deploy Eth Pool TVL NFT", (accounts) => {
     await shouldThrow(tvl.unpause({ from: accounts[0] }));
 
     // * Mint token and create tranche
-    await tvl.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.mint_item(1, 10, "0x1234", {from: accounts[0]});
     await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+    await tvl.set_user_tranche_level(1, accounts[1], {from: accounts[0]});
 
     // * Expect negative ids to prevent redemption
     await shouldThrow(tvl.redeem([-1], "0x1234", {from: accounts[0]}));
@@ -276,6 +281,20 @@ contract("Deploy Eth Pool TVL NFT", (accounts) => {
     await tvl.set_approval(accounts[1], true, { from: accounts[0] });
     let successful = await tvl.redeem.call([1], "0x1234", {from: accounts[1]});
     expect(successful.toString()).to.equal('true');
+  });
+
+  it("should be able to get and set user tranche level", async () => {
+    // * Mint token ids and create tranche
+    await tvl.mint_item(1, 10, "0x1234", {from: accounts[0]});
+    await tvl.create_tranche(1, [1], standard_uri, true, {from: accounts[0]});
+
+    // * Add user to tranche level
+    await tvl.set_user_tranche_level(1, accounts[1], {from: accounts[0]});
+    await shouldThrow(tvl.set_user_tranche_level(-1, accounts[1], {from: accounts[0]}));
+
+    // * Test that that user is actually in the level
+    let user_tranche_level = await tvl.get_user_tranche_level.call(accounts[1], { from: accounts[0] });
+    expect(user_tranche_level.toString()).to.equal('1');
   });
 
   it("should be able to pause", async () => {

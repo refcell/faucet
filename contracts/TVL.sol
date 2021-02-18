@@ -68,6 +68,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         uint256 amount
     );
 
+    event SetUserTrancheEvent(address from, uint256 level, address user);
+
     event TokenRedemption(uint256[] ids, bytes data);
 
     /// @dev private mapping to map an address to which tranche that address is on
@@ -319,6 +321,39 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         return _level;
     }
 
+    /// @dev gets tranche level _user is in
+    /// @param _user address of user to be added
+    /// @return tranche level
+    function get_user_tranche_level(address _user)
+        external
+        view
+        onlyOwner
+        returns (uint256)
+    {
+        return address_to_tranche[_user];
+    }
+
+    /// @dev adds user to tranche
+    /// @param _level tranche level
+    /// @param _user address of user to be added
+    /// @return tranche level
+    function set_user_tranche_level(uint256 _level, address _user)
+        external
+        onlyOwner
+        aboveZero(_level)
+        trancheExists(_level)
+        returns (uint256)
+    {
+        // * Set user to be in tranche
+        address_to_tranche[_user] = _level;
+
+        // * Emit SetUserTrancheEvent
+        emit SetUserTrancheEvent(msg.sender, _level, _user);
+
+        // * Returns tranche level user was added to
+        return _level;
+    }
+
     /// @dev function to delete a tranche
     /// @param _level tranche level
     /// @return deleted tranche level
@@ -365,8 +400,8 @@ abstract contract TVL is ERC1155PausableUpgradeable, OwnableUpgradeable {
         uint256[] memory user_ids = tranche_map[user_level].ids;
 
         // * Batch transfer array
-        uint256[] memory batch_ids;
-        uint256[] memory batch_amounts;
+        uint256[] memory batch_ids = new uint256[](user_ids.length);
+        uint256[] memory batch_amounts = new uint256[](user_ids.length);
 
         uint256 counter = 0;
         // * Iterate over tranche ids and redeem the ones in the input array

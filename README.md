@@ -12,7 +12,7 @@ The TVL contract located in `./contracts/TVL.sol` is the base contract.
 
 Located in ./contracts
 
-### Roadmap/TODO
+### Major Roadmap/TODO
 
 - [x] Tranches
 - [ ] Tranche Tests
@@ -20,6 +20,13 @@ Located in ./contracts
 - [ ] Token Redemptions
 - [ ] Emergency Pausing
 - [ ] Liquidations
+
+### Backlog
+
+- [ ] Governing points
+- [ ] Discord role points
+- [ ] Private Pool Access
+- [ ] Twitter shoutouts?
 
 ### Noted Issues
 

@@ -18,9 +18,17 @@ import "./tasks";
 
 const config: HardhatUserConfig = {
   networks: {
+    hardhat: {
+      forking: {
+        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY ? process.env.ALCHEMY_API_KEY : ""}`
+      }
+    },
     development: {
       url: "http://127.0.0.1:8545",
       accounts: process.env.DEV_PRIVATE_KEY ? [process.env.DEV_PRIVATE_KEY] : undefined,
+      forking: {
+        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY ? process.env.ALCHEMY_API_KEY : ""}`
+      }
     },
     kovan: {
       url: "https://kovan.infura.io/v3/" + process.env.INFURA_KEY,

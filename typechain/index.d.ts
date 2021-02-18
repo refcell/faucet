@@ -18,7 +18,6 @@ import { IRariFundManagerContract } from "./IRariFundManager";
 import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
 import { TVLContract } from "./TVL";
-import { TVLComptrollerContract } from "./TVLComptroller";
 
 declare global {
   namespace Truffle {
@@ -45,7 +44,6 @@ declare global {
       require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
       require(name: "TVL"): TVLContract;
-      require(name: "TVLComptroller"): TVLComptrollerContract;
     }
   }
 }
@@ -105,7 +103,3 @@ export {
 } from "./IRariFundToken";
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
 export { TVLContract, TVLInstance } from "./TVL";
-export {
-  TVLComptrollerContract,
-  TVLComptrollerInstance,
-} from "./TVLComptroller";

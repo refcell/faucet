@@ -67,7 +67,7 @@ contract EthPoolTVL is TVL {
         aboveZero(_max_amount)
         returns (uint256)
     {
-        uint256 fund_balance = ethPoolInstance.getFundBalance();
+        uint256 fund_balance = ethPoolInstance.getEntireBalance();
         uint256 user_balance = _balanceOf(_from, fund_balance);
         uint256 percent = _percent(user_balance, fund_balance, 3);
 

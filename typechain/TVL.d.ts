@@ -39,6 +39,18 @@ export interface Paused {
   };
 }
 
+export interface SetUserTrancheEvent {
+  name: "SetUserTrancheEvent";
+  args: {
+    from: string;
+    level: BN;
+    user: string;
+    0: string;
+    1: BN;
+    2: string;
+  };
+}
+
 export interface TokenRedemption {
   name: "TokenRedemption";
   args: {
@@ -157,6 +169,7 @@ type AllEvents =
   | ApprovalForAll
   | OwnershipTransferred
   | Paused
+  | SetUserTrancheEvent
   | TokenRedemption
   | TrancheCreated
   | TrancheDeleted
@@ -278,6 +291,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
     _level: number | BN | string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<string>;
+
+  get_user_tranche_level(
+    _user: string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<BN>;
 
   initialize: {
     (
@@ -573,6 +591,29 @@ export interface TVLInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
+  set_user_tranche_level: {
+    (
+      _level: number | BN | string,
+      _user: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse<AllEvents>>;
+    call(
+      _level: number | BN | string,
+      _user: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
+    sendTransaction(
+      _level: number | BN | string,
+      _user: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _level: number | BN | string,
+      _user: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   supportsInterface(
     interfaceId: string,
     txDetails?: Truffle.TransactionDetails
@@ -721,6 +762,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
       _level: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
+
+    get_user_tranche_level(
+      _user: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
 
     initialize: {
       (
@@ -1012,6 +1058,29 @@ export interface TVLInstance extends Truffle.ContractInstance {
       estimateGas(
         _level: number | BN | string,
         _uri: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    set_user_tranche_level: {
+      (
+        _level: number | BN | string,
+        _user: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _level: number | BN | string,
+        _user: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<BN>;
+      sendTransaction(
+        _level: number | BN | string,
+        _user: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _level: number | BN | string,
+        _user: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
