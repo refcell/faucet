@@ -1,6 +1,8 @@
-# erc1155
+# Faucet
 
-fungibility-agnostic and gas-efficient token contracts for gamifying TVL
+![Solidity Coverage Tests](https://github.com/abigger87/Faucet/workflows/CoverageTests/badge.svg)
+
+Fungibility-agnostic and gas-efficient token contracts for gamifying TVL. Built on top of erc1155.
 
 ### How it works
 
