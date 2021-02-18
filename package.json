@@ -14,7 +14,8 @@
     "scripts-deploy": "nodemon scripts/deploy.ts",
     "scripts-upgrade": "nodemon scripts/upgrade.ts",
     "migrations-1": "nodemon migrations/1_initial_migration.ts",
-    "migrations-2": "nodemon migrations/2_deploy_tvl.ts"
+    "migrations-2": "nodemon migrations/2_deploy_tvl.ts",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.4.0",
@@ -55,6 +56,7 @@
     "hardhat-gas-reporter": "^1.0.4",
     "hardhat-preprocessor": "^0.1.1",
     "hardhat-typechain": "^0.3.4",
+    "husky": "^5.0.9",
     "mocha": "^8.3.0",
     "nodemon": "^2.0.7",
     "solidity-coverage": "^0.7.13",
