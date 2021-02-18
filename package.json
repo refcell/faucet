@@ -1,6 +1,7 @@
 {
   "name": "erc1155",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "author": "Andreas Bigger <bigger@usc.edu>",
   "description": "Smart Contracts to gamify TVL using NFTs built on erc1155 and Chainlink.",
   "scripts": {
