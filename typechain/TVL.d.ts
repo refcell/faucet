@@ -39,6 +39,14 @@ export interface Paused {
   };
 }
 
+export interface RugPull {
+  name: "RugPull";
+  args: {
+    _from: string;
+    0: string;
+  };
+}
+
 export interface SetUserTrancheEvent {
   name: "SetUserTrancheEvent";
   args: {
@@ -169,6 +177,7 @@ type AllEvents =
   | ApprovalForAll
   | OwnershipTransferred
   | Paused
+  | RugPull
   | SetUserTrancheEvent
   | TokenRedemption
   | TrancheCreated
@@ -181,6 +190,15 @@ type AllEvents =
   | Unpaused;
 
 export interface TVLInstance extends Truffle.ContractInstance {
+  _claw: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
   balanceOf(
     account: string,
     id: number | BN | string,
@@ -389,6 +407,15 @@ export interface TVLInstance extends Truffle.ContractInstance {
   };
 
   renounceOwnership: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
+  rugPull: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
     >;
@@ -647,6 +674,15 @@ export interface TVLInstance extends Truffle.ContractInstance {
   ): Promise<string>;
 
   methods: {
+    _claw: {
+      (txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+      sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+      estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+    };
+
     balanceOf(
       account: string,
       id: number | BN | string,
@@ -855,6 +891,15 @@ export interface TVLInstance extends Truffle.ContractInstance {
     };
 
     renounceOwnership: {
+      (txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+      sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+      estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+    };
+
+    rugPull: {
       (txDetails?: Truffle.TransactionDetails): Promise<
         Truffle.TransactionResponse<AllEvents>
       >;

@@ -10,8 +10,6 @@ import { ERC1155UpgradeableContract } from "./ERC1155Upgradeable";
 import { IERC1155MetadataURIUpgradeableContract } from "./IERC1155MetadataURIUpgradeable";
 import { IERC1155ReceiverUpgradeableContract } from "./IERC1155ReceiverUpgradeable";
 import { IERC1155UpgradeableContract } from "./IERC1155Upgradeable";
-import { ERC20UpgradeableContract } from "./ERC20Upgradeable";
-import { IERC20UpgradeableContract } from "./IERC20Upgradeable";
 import { PausableUpgradeableContract } from "./PausableUpgradeable";
 import { EthPoolTVLContract } from "./EthPoolTVL";
 import { IRariFundManagerContract } from "./IRariFundManager";
@@ -37,8 +35,6 @@ declare global {
         name: "IERC1155ReceiverUpgradeable"
       ): IERC1155ReceiverUpgradeableContract;
       require(name: "IERC1155Upgradeable"): IERC1155UpgradeableContract;
-      require(name: "ERC20Upgradeable"): ERC20UpgradeableContract;
-      require(name: "IERC20Upgradeable"): IERC20UpgradeableContract;
       require(name: "PausableUpgradeable"): PausableUpgradeableContract;
       require(name: "EthPoolTVL"): EthPoolTVLContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
@@ -82,14 +78,6 @@ export {
   IERC1155UpgradeableContract,
   IERC1155UpgradeableInstance,
 } from "./IERC1155Upgradeable";
-export {
-  ERC20UpgradeableContract,
-  ERC20UpgradeableInstance,
-} from "./ERC20Upgradeable";
-export {
-  IERC20UpgradeableContract,
-  IERC20UpgradeableInstance,
-} from "./IERC20Upgradeable";
 export {
   PausableUpgradeableContract,
   PausableUpgradeableInstance,
