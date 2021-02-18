@@ -20,6 +20,9 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     // * Default pool address
     address internal poolAddress;
 
+    // * Event to record rug pulls
+    event RugPull(address _from);
+
     /// @dev load metadata api and instantiate ownership
     /// @param _owner address of the contract owner
     /// @param _uri base uri for initialization of erc1155
@@ -167,7 +170,7 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
      *
      * - The contract must not be paused.
      */
-    function pause() external whenNotPaused onlyOwner {
+    function pause() public whenNotPaused onlyOwner {
         _pause();
     }
 
@@ -178,9 +181,24 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
      *
      * - The contract must be paused.
      */
-    function unpause() external whenPaused onlyOwner {
+    function unpause() public whenPaused onlyOwner {
         _unpause();
     }
 
-    // TODO: Implement rug pull safety measure
+    /// @dev disables any token flow by pausing the contract and claws back any to contract owner
+    function rugPull() external onlyOwner {
+        // * Pause the contract and all token transfers
+        pause();
+
+        // * Claw back all tokens
+        _claw();
+
+        // * Emit event
+        emit RugPull(msg.sender);
+    }
+
+    // @dev internal function to claw back all tokens to specific admin address
+    function _claw() public onlyOwner {
+        // TODO: Implement
+    }
 }
