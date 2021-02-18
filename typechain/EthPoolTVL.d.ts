@@ -194,16 +194,6 @@ export interface EthPoolTVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN[]>;
 
-  c_0xbe9c4e16(
-    c__0xbe9c4e16: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
-  c_0xdf5ef881(
-    c__0xdf5ef881: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   create_tranche: {
     (
       _level: number | BN | string,
@@ -689,16 +679,6 @@ export interface EthPoolTVLInstance extends Truffle.ContractInstance {
       ids: (number | BN | string)[],
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN[]>;
-
-    c_0xbe9c4e16(
-      c__0xbe9c4e16: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-
-    c_0xdf5ef881(
-      c__0xdf5ef881: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     create_tranche: {
       (

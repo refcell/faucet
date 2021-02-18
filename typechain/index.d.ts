@@ -17,6 +17,7 @@ import { EthPoolTVLContract } from "./EthPoolTVL";
 import { IRariFundManagerContract } from "./IRariFundManager";
 import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
+import { TrancheSystemContract } from "./TrancheSystem";
 import { TVLContract } from "./TVL";
 
 declare global {
@@ -43,6 +44,7 @@ declare global {
       require(name: "IRariFundManager"): IRariFundManagerContract;
       require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
+      require(name: "TrancheSystem"): TrancheSystemContract;
       require(name: "TVL"): TVLContract;
     }
   }
@@ -102,4 +104,5 @@ export {
   IRariFundTokenInstance,
 } from "./IRariFundToken";
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
+export { TrancheSystemContract, TrancheSystemInstance } from "./TrancheSystem";
 export { TVLContract, TVLInstance } from "./TVL";

@@ -28,11 +28,6 @@ export interface IRariFundTokenInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  c_0x6c869a3e(
-    c__0x6c869a3e: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   totalSupply: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -60,11 +55,6 @@ export interface IRariFundTokenInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
-
-    c_0x6c869a3e(
-      c__0x6c869a3e: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     totalSupply: {
       (txDetails?: Truffle.TransactionDetails): Promise<

@@ -13,11 +13,6 @@ export interface MigrationsContract
 type AllEvents = never;
 
 export interface MigrationsInstance extends Truffle.ContractInstance {
-  c_0x11500a72(
-    c__0x11500a72: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   last_completed_migration(txDetails?: Truffle.TransactionDetails): Promise<BN>;
 
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
@@ -60,11 +55,6 @@ export interface MigrationsInstance extends Truffle.ContractInstance {
   };
 
   methods: {
-    c_0x11500a72(
-      c__0x11500a72: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-
     last_completed_migration(
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN>;
