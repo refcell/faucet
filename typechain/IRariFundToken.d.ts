@@ -5,30 +5,30 @@
 import BN from "bn.js";
 import { EventData, PastEventOptions } from "web3-eth-contract";
 
-export interface IRariFundManagerContract
-  extends Truffle.Contract<IRariFundManagerInstance> {
-  "new"(meta?: Truffle.TransactionDetails): Promise<IRariFundManagerInstance>;
+export interface IRariFundTokenContract
+  extends Truffle.Contract<IRariFundTokenInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<IRariFundTokenInstance>;
 }
 
 type AllEvents = never;
 
-export interface IRariFundManagerInstance extends Truffle.ContractInstance {
+export interface IRariFundTokenInstance extends Truffle.ContractInstance {
   balanceOf: {
-    (account: string, txDetails?: Truffle.TransactionDetails): Promise<
+    (_account: string, txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
     >;
-    call(account: string, txDetails?: Truffle.TransactionDetails): Promise<BN>;
+    call(_account: string, txDetails?: Truffle.TransactionDetails): Promise<BN>;
     sendTransaction(
-      account: string,
+      _account: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
     estimateGas(
-      account: string,
+      _account: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
 
-  getEntireBalance: {
+  totalSupply: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
     >;
@@ -39,24 +39,24 @@ export interface IRariFundManagerInstance extends Truffle.ContractInstance {
 
   methods: {
     balanceOf: {
-      (account: string, txDetails?: Truffle.TransactionDetails): Promise<
+      (_account: string, txDetails?: Truffle.TransactionDetails): Promise<
         Truffle.TransactionResponse<AllEvents>
       >;
       call(
-        account: string,
+        _account: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<BN>;
       sendTransaction(
-        account: string,
+        _account: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<string>;
       estimateGas(
-        account: string,
+        _account: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
 
-    getEntireBalance: {
+    totalSupply: {
       (txDetails?: Truffle.TransactionDetails): Promise<
         Truffle.TransactionResponse<AllEvents>
       >;

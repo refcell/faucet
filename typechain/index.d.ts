@@ -10,14 +10,13 @@ import { ERC1155UpgradeableContract } from "./ERC1155Upgradeable";
 import { IERC1155MetadataURIUpgradeableContract } from "./IERC1155MetadataURIUpgradeable";
 import { IERC1155ReceiverUpgradeableContract } from "./IERC1155ReceiverUpgradeable";
 import { IERC1155UpgradeableContract } from "./IERC1155Upgradeable";
-import { ERC20UpgradeableContract } from "./ERC20Upgradeable";
-import { IERC20UpgradeableContract } from "./IERC20Upgradeable";
 import { PausableUpgradeableContract } from "./PausableUpgradeable";
 import { EthPoolTVLContract } from "./EthPoolTVL";
 import { IRariFundManagerContract } from "./IRariFundManager";
+import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
+import { TrancheSystemContract } from "./TrancheSystem";
 import { TVLContract } from "./TVL";
-import { TVLComptrollerContract } from "./TVLComptroller";
 
 declare global {
   namespace Truffle {
@@ -36,14 +35,13 @@ declare global {
         name: "IERC1155ReceiverUpgradeable"
       ): IERC1155ReceiverUpgradeableContract;
       require(name: "IERC1155Upgradeable"): IERC1155UpgradeableContract;
-      require(name: "ERC20Upgradeable"): ERC20UpgradeableContract;
-      require(name: "IERC20Upgradeable"): IERC20UpgradeableContract;
       require(name: "PausableUpgradeable"): PausableUpgradeableContract;
       require(name: "EthPoolTVL"): EthPoolTVLContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
+      require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
+      require(name: "TrancheSystem"): TrancheSystemContract;
       require(name: "TVL"): TVLContract;
-      require(name: "TVLComptroller"): TVLComptrollerContract;
     }
   }
 }
@@ -81,14 +79,6 @@ export {
   IERC1155UpgradeableInstance,
 } from "./IERC1155Upgradeable";
 export {
-  ERC20UpgradeableContract,
-  ERC20UpgradeableInstance,
-} from "./ERC20Upgradeable";
-export {
-  IERC20UpgradeableContract,
-  IERC20UpgradeableInstance,
-} from "./IERC20Upgradeable";
-export {
   PausableUpgradeableContract,
   PausableUpgradeableInstance,
 } from "./PausableUpgradeable";
@@ -97,9 +87,10 @@ export {
   IRariFundManagerContract,
   IRariFundManagerInstance,
 } from "./IRariFundManager";
-export { MigrationsContract, MigrationsInstance } from "./Migrations";
-export { TVLContract, TVLInstance } from "./TVL";
 export {
-  TVLComptrollerContract,
-  TVLComptrollerInstance,
-} from "./TVLComptroller";
+  IRariFundTokenContract,
+  IRariFundTokenInstance,
+} from "./IRariFundToken";
+export { MigrationsContract, MigrationsInstance } from "./Migrations";
+export { TrancheSystemContract, TrancheSystemInstance } from "./TrancheSystem";
+export { TVLContract, TVLInstance } from "./TVL";

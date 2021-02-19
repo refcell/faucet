@@ -1,11 +1,21 @@
-name: Tests
+name: CoverageTests
 
 on: [push, pull_request]
 
 jobs:
   e2e-and-unit:
     runs-on: ubuntu-16.04
-
+    env:
+      GWEI_GAS_PRICE: ${{ secrets.GWEI_GAS_PRICE }}
+      REPORT_GAS: ${{ secrets.REPORT_GAS }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      DEV_PUBLIC_KEY: ${{ secrets.DEV_PUBLIC_KEY }}
+      DEV_PRIVATE_KEY: ${{ secrets.DEV_PRIVATE_KEY }}
+      INFURA_KEY: ${{ secrets.INFURA_KEY }}
+      ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      COINMARKETCAP_API_KEY: ${{ secrets.COINMARKETCAP_API_KEY }}
+      ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+      ALCHEMY_API_MNEMONIC: ${{ secrets.ALCHEMY_API_MNEMONIC }}
     steps:
       - uses: actions/checkout@v2
 

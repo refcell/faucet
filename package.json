@@ -1,6 +1,7 @@
 {
   "name": "erc1155",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "author": "Andreas Bigger <bigger@usc.edu>",
   "description": "Smart Contracts to gamify TVL using NFTs built on erc1155 and Chainlink.",
   "scripts": {
@@ -13,14 +14,18 @@
     "scripts-deploy": "nodemon scripts/deploy.ts",
     "scripts-upgrade": "nodemon scripts/upgrade.ts",
     "migrations-1": "nodemon migrations/1_initial_migration.ts",
-    "migrations-2": "nodemon migrations/2_deploy_tvl.ts"
+    "migrations-2": "nodemon migrations/2_deploy_tvl.ts",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.4.0",
     "@openzeppelin/contracts-upgradeable": "^3.4.0",
     "@openzeppelin/hardhat-upgrades": "^1.6.0",
     "fs": "^0.0.1-security",
-    "inquirer": "^7.3.3"
+    "inquirer": "^7.3.3",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -40,6 +45,7 @@
     "@types/chai-as-promised": "^7.1.3",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.20",
+    "auto-changelog": "^2.2.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "bn-chai": "^1.0.1",
@@ -47,13 +53,16 @@
     "chai-as-promised": "^7.1.1",
     "chai-bn-equal": "^1.0.2",
     "dotenv": "^8.2.0",
+    "eslint": "^7.20.0",
     "ganache-time-traveler": "^1.0.15",
     "hardhat": "^2.0.7",
     "hardhat-gas-reporter": "^1.0.4",
     "hardhat-preprocessor": "^0.1.1",
     "hardhat-typechain": "^0.3.4",
+    "husky": "^5.0.9",
     "mocha": "^8.3.0",
     "nodemon": "^2.0.7",
+    "solhint": "^3.3.2",
     "solidity-coverage": "^0.7.13",
     "ts-generator": "^0.1.1",
     "ts-node": "^9.1.1",

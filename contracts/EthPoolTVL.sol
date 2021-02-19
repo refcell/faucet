@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "./interfaces/IRariFundManager.sol";
 import "./TVL.sol";
+import "./interfaces/IRariFundToken.sol";
+import "./interfaces/IRariFundManager.sol";
 
 /// ---------------------------------------
 /// @title An NFT for Rari Eth Pool rewards
@@ -15,6 +16,9 @@ contract EthPoolTVL is TVL {
 
     // * Pool instance
     IRariFundManager private ethPoolInstance;
+    IRariFundToken private rftInstance;
+
+    address private rftAddress = 0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
 
     /// @dev load metadata api and fetch eth_pool balance
     /// @param _owner address of the contract owner
@@ -27,6 +31,7 @@ contract EthPoolTVL is TVL {
     ) public override(TVL) initializer {
         poolAddress = _pool_address;
         ethPoolInstance = IRariFundManager(_pool_address);
+        rftInstance = IRariFundToken(rftAddress);
         __ERC1155_init(_uri);
         __Ownable_init();
         transferOwnership(_owner);
@@ -59,11 +64,11 @@ contract EthPoolTVL is TVL {
     function get_pool_share(address _from, uint256 _max_amount)
         public
         override
-        aboveOrEqualZero(_max_amount)
+        aboveZero(_max_amount)
         returns (uint256)
     {
-        uint256 fund_balance = ethPoolInstance.getFundBalance();
-        uint256 user_balance = ethPoolInstance.balanceOf(_from);
+        uint256 fund_balance = ethPoolInstance.getEntireBalance();
+        uint256 user_balance = _balanceOf(_from, fund_balance);
         uint256 percent = _percent(user_balance, fund_balance, 3);
 
         return _percent(_max_amount * percent, 1000, 2);
@@ -84,5 +89,21 @@ contract EthPoolTVL is TVL {
         // with rounding of last digit
         uint256 _quotient = ((_multiplied_numerator / _denominator) + 5) / 10;
         return (_quotient);
+    }
+
+    /// @dev Re-implemented Rari balanceOf function to prevent duplicate getFundBalance Calls
+    /// @param _account user account
+    /// @param _fundBalance fund balance
+    /// @return uint256 user balance in pool
+    function _balanceOf(address _account, uint256 _fundBalance)
+        internal
+        returns (uint256)
+    {
+        uint256 rftTotalSupply = rftInstance.totalSupply();
+        if (rftTotalSupply == 0) return 0;
+        uint256 rftBalance = rftInstance.balanceOf(_account);
+        uint256 accountBalanceUSD =
+            rftBalance.mul(_fundBalance).div(rftTotalSupply);
+        return accountBalanceUSD;
     }
 }
