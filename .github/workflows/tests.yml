@@ -25,5 +25,5 @@ jobs:
       - name: Compile
         run: yarn compile
 
-      - name: Run unit tests without coverage bc solidity-coverage github authentication issues
-        run: yarn test
+      - name: Run unit tests with coverage
+        run: yarn coverage
