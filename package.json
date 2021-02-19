@@ -22,7 +22,10 @@
     "@openzeppelin/contracts-upgradeable": "^3.4.0",
     "@openzeppelin/hardhat-upgrades": "^1.6.0",
     "fs": "^0.0.1-security",
-    "inquirer": "^7.3.3"
+    "inquirer": "^7.3.3",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
