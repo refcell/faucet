@@ -18,7 +18,9 @@ contract EthPoolTVL is TVL {
     IRariFundManager private ethPoolInstance;
     IRariFundToken private rftInstance;
 
-    address private rftAddress = 0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
+    // * Rari Fund Token constant Address
+    address private constant rftAddress =
+        0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
 
     /// @dev load metadata api and fetch eth_pool balance
     /// @param _owner address of the contract owner
