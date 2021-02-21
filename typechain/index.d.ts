@@ -11,12 +11,12 @@ import { IERC1155MetadataURIUpgradeableContract } from "./IERC1155MetadataURIUpg
 import { IERC1155ReceiverUpgradeableContract } from "./IERC1155ReceiverUpgradeable";
 import { IERC1155UpgradeableContract } from "./IERC1155Upgradeable";
 import { PausableUpgradeableContract } from "./PausableUpgradeable";
+import { TrancheSystemContract } from "./TrancheSystem";
+import { TVLContract } from "./TVL";
 import { EthPoolTVLContract } from "./EthPoolTVL";
 import { IRariFundManagerContract } from "./IRariFundManager";
 import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
-import { TrancheSystemContract } from "./TrancheSystem";
-import { TVLContract } from "./TVL";
 
 declare global {
   namespace Truffle {
@@ -36,12 +36,12 @@ declare global {
       ): IERC1155ReceiverUpgradeableContract;
       require(name: "IERC1155Upgradeable"): IERC1155UpgradeableContract;
       require(name: "PausableUpgradeable"): PausableUpgradeableContract;
+      require(name: "TrancheSystem"): TrancheSystemContract;
+      require(name: "TVL"): TVLContract;
       require(name: "EthPoolTVL"): EthPoolTVLContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
       require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
-      require(name: "TrancheSystem"): TrancheSystemContract;
-      require(name: "TVL"): TVLContract;
     }
   }
 }
@@ -82,6 +82,8 @@ export {
   PausableUpgradeableContract,
   PausableUpgradeableInstance,
 } from "./PausableUpgradeable";
+export { TrancheSystemContract, TrancheSystemInstance } from "./TrancheSystem";
+export { TVLContract, TVLInstance } from "./TVL";
 export { EthPoolTVLContract, EthPoolTVLInstance } from "./EthPoolTVL";
 export {
   IRariFundManagerContract,
@@ -92,5 +94,3 @@ export {
   IRariFundTokenInstance,
 } from "./IRariFundToken";
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
-export { TrancheSystemContract, TrancheSystemInstance } from "./TrancheSystem";
-export { TVLContract, TVLInstance } from "./TVL";

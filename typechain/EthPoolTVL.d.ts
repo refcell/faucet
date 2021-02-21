@@ -418,6 +418,8 @@ export interface EthPoolTVLInstance extends Truffle.ContractInstance {
     estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
   };
 
+  rftAddress(txDetails?: Truffle.TransactionDetails): Promise<string>;
+
   rugPull: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -921,6 +923,8 @@ export interface EthPoolTVLInstance extends Truffle.ContractInstance {
       sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
       estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
     };
+
+    rftAddress(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
     rugPull: {
       (txDetails?: Truffle.TransactionDetails): Promise<

@@ -2,38 +2,43 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "./abstracts/TVL.sol";
-import "./interfaces/IRariFundToken.sol";
-import "./interfaces/IRariFundManager.sol";
+import "../interfaces/IRariFundToken.sol";
+import "../interfaces/IRariFundManager.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 
 /// ---------------------------------------
-/// @title An NFT for Rari Eth Pool rewards
+/// @title Faucet adapter for Rari Eth Pool
 /// @author Andreas Bigger <bigger@usc.edu>
 /// @dev ERC1155 NFTs to unlock rewards based on eth pool TVL
 /// ---------------------------------------
-contract EthPoolTVL is TVL {
+contract EthPoolAdapter is OwnableUpgradeable {
     using SafeMathUpgradeable for uint256;
+
+    modifier aboveZero(uint256 _x) {
+        require(_x > 0, "Input must be greater than zero.");
+        _;
+    }
 
     // * Pool instance
     IRariFundManager private ethPoolInstance;
     IRariFundToken private rftInstance;
 
-    // * Rari Fund Token constant Address
-    address public rftAddress = 0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
+    address private rftAddress = 0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
+
+    // * Default pool address
+    address private poolAddress;
 
     /// @dev load metadata api and fetch eth_pool balance
     /// @param _owner address of the contract owner
-    /// @param _uri base uri for initialization of erc1155
     /// @param _pool_address address of the pool
-    function initialize(
-        address _owner,
-        string memory _uri,
-        address _pool_address
-    ) public override(TVL) initializer {
+    function initialize(address _owner, address _pool_address)
+        public
+        initializer
+    {
         poolAddress = _pool_address;
         ethPoolInstance = IRariFundManager(_pool_address);
         rftInstance = IRariFundToken(rftAddress);
-        __ERC1155_init(_uri);
         __Ownable_init();
         transferOwnership(_owner);
     }
@@ -64,7 +69,6 @@ contract EthPoolTVL is TVL {
     /// @return uint256 amount of tokens to give to the user
     function get_pool_share(address _from, uint256 _max_amount)
         public
-        override
         aboveZero(_max_amount)
         returns (uint256)
     {
@@ -103,8 +107,8 @@ contract EthPoolTVL is TVL {
         uint256 rftTotalSupply = rftInstance.totalSupply();
         if (rftTotalSupply == 0) return 0;
         uint256 rftBalance = rftInstance.balanceOf(_account);
-        uint256 accountBalanceUSD = rftBalance.mul(_fundBalance);
-        accountBalanceUSD = accountBalanceUSD.div(rftTotalSupply);
+        uint256 accountBalanceUSD =
+            rftBalance.mul(_fundBalance).div(rftTotalSupply);
         return accountBalanceUSD;
     }
 }
