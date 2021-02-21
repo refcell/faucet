@@ -5,14 +5,13 @@
 import BN from "bn.js";
 import { EventData, PastEventOptions } from "web3-eth-contract";
 
-export interface IRariFundManagerContract
-  extends Truffle.Contract<IRariFundManagerInstance> {
-  "new"(meta?: Truffle.TransactionDetails): Promise<IRariFundManagerInstance>;
+export interface IFusePoolContract extends Truffle.Contract<IFusePoolInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<IFusePoolInstance>;
 }
 
 type AllEvents = never;
 
-export interface IRariFundManagerInstance extends Truffle.ContractInstance {
+export interface IFusePoolInstance extends Truffle.ContractInstance {
   balanceOf: {
     (account: string, txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -28,8 +27,8 @@ export interface IRariFundManagerInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  c_0x35130c47(
-    c__0x35130c47: string,
+  c_0x7723006a(
+    c__0x7723006a: string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<void>;
 
@@ -61,8 +60,8 @@ export interface IRariFundManagerInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    c_0x35130c47(
-      c__0x35130c47: string,
+    c_0x7723006a(
+      c__0x7723006a: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<void>;
 

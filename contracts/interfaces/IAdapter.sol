@@ -29,8 +29,14 @@ contract IAdapter {
     /// @dev Allow owner to set pool address to avoid unnecessary upgrades
     /// @param _pool_address address of the pool
     /// @return address of new pool
-    function set_pool_address(address _pool_address)
-        external
+    function set_pool_address(address _pool_address) public returns (address) {}
+
+    /// @dev Allow owner to set pool address to avoid unnecessary upgrades
+    /// @param _from address of sender when internal
+    /// @param _pool_address address of the pool
+    /// @return address of new pool
+    function set_pool_address(address _from, address _pool_address)
+        public
         returns (address)
     {}
 

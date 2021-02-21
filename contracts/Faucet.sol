@@ -17,7 +17,7 @@ import "./interfaces/IRariFundManager.sol";
 /// @dev ERC1155 NFTs to unlock rewards based on pool TVL
 ///      is extendable using adapters.
 /// ---------------------------------------
-contract FaucetPool is TVL {
+contract Faucet is TVL {
     using SafeMathUpgradeable for uint256;
 
     // * Pool Adapter
@@ -46,15 +46,15 @@ contract FaucetPool is TVL {
     }
 
     /// @dev Allow owner to set pool address to avoid unnecessary upgrades
+    /// @dev Underlying Adapter handles permissions if msg.sender is allowed to call
     /// @param _pool_address address of the pool
     /// @return address of new pool
     function set_pool_address(address _pool_address)
         external
-        onlyOwner
         returns (address)
     {
         require(_pool_address != address(0), "Must be a valid address");
-        return adapterInstance.set_pool_address(_pool_address);
+        return adapterInstance.set_pool_address(msg.sender, _pool_address);
     }
 
     /// @dev Allow owner to get the current adapter address

@@ -5,8 +5,9 @@
 import BN from "bn.js";
 import { EventData, PastEventOptions } from "web3-eth-contract";
 
-export interface TVLContract extends Truffle.Contract<TVLInstance> {
-  "new"(meta?: Truffle.TransactionDetails): Promise<TVLInstance>;
+export interface FaucetPoolContract
+  extends Truffle.Contract<FaucetPoolInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<FaucetPoolInstance>;
 }
 
 export interface ApprovalForAll {
@@ -189,7 +190,7 @@ type AllEvents =
   | URI
   | Unpaused;
 
-export interface TVLInstance extends Truffle.ContractInstance {
+export interface FaucetPoolInstance extends Truffle.ContractInstance {
   _claw: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -213,6 +214,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
 
   c_0x6569d814(
     c__0x6569d814: string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<void>;
+
+  c_0x7084c011(
+    c__0x7084c011: string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<void>;
 
@@ -270,6 +276,10 @@ export interface TVLInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
+
+  get_adapter_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
+
+  get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
   get_pool_share: {
     (
@@ -527,6 +537,24 @@ export interface TVLInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
+  set_adapter_address: {
+    (_adapter_address: string, txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(
+      _adapter_address: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _adapter_address: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _adapter_address: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   set_approval: {
     (
       _user: string,
@@ -546,6 +574,24 @@ export interface TVLInstance extends Truffle.ContractInstance {
     estimateGas(
       _user: string,
       _approved: boolean,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  set_pool_address: {
+    (_pool_address: string, txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(
+      _pool_address: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _pool_address: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _pool_address: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
@@ -710,6 +756,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<void>;
 
+    c_0x7084c011(
+      c__0x7084c011: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+
     c_0x958ca5aa(
       c__0x958ca5aa: string,
       txDetails?: Truffle.TransactionDetails
@@ -764,6 +815,12 @@ export interface TVLInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
+
+    get_adapter_address(
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+
+    get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
     get_pool_share: {
       (
@@ -1021,6 +1078,25 @@ export interface TVLInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
+    set_adapter_address: {
+      (
+        _adapter_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<Truffle.TransactionResponse<AllEvents>>;
+      call(
+        _adapter_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      sendTransaction(
+        _adapter_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _adapter_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
     set_approval: {
       (
         _user: string,
@@ -1040,6 +1116,24 @@ export interface TVLInstance extends Truffle.ContractInstance {
       estimateGas(
         _user: string,
         _approved: boolean,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    set_pool_address: {
+      (_pool_address: string, txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(
+        _pool_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      sendTransaction(
+        _pool_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _pool_address: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
