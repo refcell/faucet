@@ -28,11 +28,6 @@ export interface IRariFundManagerInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  c_0x35130c47(
-    c__0x35130c47: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   getEntireBalance: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -60,11 +55,6 @@ export interface IRariFundManagerInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
-
-    c_0x35130c47(
-      c__0x35130c47: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     getEntireBalance: {
       (txDetails?: Truffle.TransactionDetails): Promise<

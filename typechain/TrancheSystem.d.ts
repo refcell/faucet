@@ -106,11 +106,6 @@ type AllEvents =
   | TrancheUpdate;
 
 export interface TrancheSystemInstance extends Truffle.ContractInstance {
-  c_0x6569d814(
-    c__0x6569d814: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   create_tranche: {
     (
       _level: number | BN | string,
@@ -313,11 +308,6 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
   };
 
   methods: {
-    c_0x6569d814(
-      c__0x6569d814: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-
     create_tranche: {
       (
         _level: number | BN | string,

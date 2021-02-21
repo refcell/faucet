@@ -41,16 +41,6 @@ export interface FusePoolAdapterInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  c_0x68983798(
-    c__0x68983798: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
-  c_0xc54aa01c(
-    c__0xc54aa01c: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
   get_pool_share: {
@@ -164,16 +154,6 @@ export interface FusePoolAdapterInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
-
-    c_0x68983798(
-      c__0x68983798: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-
-    c_0xc54aa01c(
-      c__0xc54aa01c: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
 

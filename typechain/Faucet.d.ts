@@ -211,21 +211,6 @@ export interface FaucetInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN[]>;
 
-  c_0x6569d814(
-    c__0x6569d814: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
-  c_0x958ca5aa(
-    c__0x958ca5aa: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
-  c_0xf2e66c83(
-    c__0xf2e66c83: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   create_tranche: {
     (
       _level: number | BN | string,
@@ -749,21 +734,6 @@ export interface FaucetInstance extends Truffle.ContractInstance {
       ids: (number | BN | string)[],
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN[]>;
-
-    c_0x6569d814(
-      c__0x6569d814: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-
-    c_0x958ca5aa(
-      c__0x958ca5aa: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-
-    c_0xf2e66c83(
-      c__0xf2e66c83: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     create_tranche: {
       (

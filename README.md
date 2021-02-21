@@ -1,18 +1,37 @@
 # Faucet
 
-![Solidity Coverage Tests](https://github.com/abigger87/Faucet/workflows/CoverageTests/badge.svg)
+![Solidity Coverage](https://github.com/abigger87/Faucet/workflows/Coverage/badge.svg)
+![Solidity Compiling](https://github.com/abigger87/Faucet/workflows/Compile/badge.svg)
+![Solidity Linting](https://github.com/abigger87/Faucet/workflows/Lint/badge.svg)
 
-Fungibility-agnostic and gas-efficient token contracts for gamifying TVL. Built on top of erc1155.
+Fungibility-agnostic and gas-efficient token contracts for gamifying TVL.
+
+Built on top of OpenZeppelin's ERC 1155 Implementation.
 
 ### How it works
 
-The TVL contract located in `./contracts/TVL.sol` is the base contract.
+The Faucet contract located in `contracts/Faucet.sol` is the base contract.
 
-#### TVL Functions
+This is a Faucet that manages how Pool TVL-based NFT tokens are distributed to pool members.
 
-### Contracts
+Faucet has an Adapter (interface: `contracts/interfaces/IAdapter.sol` and implemented in `contracts/adapters/`)
+that specifies how to interact with various pools.
+So, Faucet is easily extensible by creating an adapter to manage the interaction between Faucet.sol and your pool.
 
-Located in ./contracts
+### Structure
+
+<b>Base Contracts</b>: `contracts/`
+<b>Adapters</b>: `contracts/adapters/`
+<b>Interfaces</b>: `contracts/interfaces/`
+<b>Various Abstract Parent Contracts</b>: `contracts/abstracts/`
+
+<b>Tests</b>: `tests/`
+
+<b>Hardhat Deployment</b>: `tasks.ts`
+
+NOTE: Scripts and Migrations are redundand
+<b>Migrations</b>: `migrations/`
+<b>Scripts</b>: `scripts/`
 
 ### Major Roadmap/TODO
 

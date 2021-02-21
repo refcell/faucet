@@ -27,11 +27,6 @@ export interface IAdapterInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  c_0x33c01b4e(
-    c__0x33c01b4e: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   getEntireBalance: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -84,11 +79,6 @@ export interface IAdapterInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
-
-    c_0x33c01b4e(
-      c__0x33c01b4e: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     getEntireBalance: {
       (txDetails?: Truffle.TransactionDetails): Promise<

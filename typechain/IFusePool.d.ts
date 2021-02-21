@@ -27,11 +27,6 @@ export interface IFusePoolInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  c_0x7723006a(
-    c__0x7723006a: string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<void>;
-
   getEntireBalance: {
     (txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -59,11 +54,6 @@ export interface IFusePoolInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
-
-    c_0x7723006a(
-      c__0x7723006a: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
 
     getEntireBalance: {
       (txDetails?: Truffle.TransactionDetails): Promise<
