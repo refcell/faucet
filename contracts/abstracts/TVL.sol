@@ -14,6 +14,7 @@ import "./TrancheSystem.sol";
 ///      Access to allow pool creators to
 ///      distribute NFT rewards
 /// ---------------------------------------
+
 abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     using SafeMathUpgradeable for uint256;
 

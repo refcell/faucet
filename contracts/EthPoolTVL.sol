@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "./TVL.sol";
+import "./abstracts/TVL.sol";
 import "./interfaces/IRariFundToken.sol";
 import "./interfaces/IRariFundManager.sol";
 
@@ -19,8 +19,7 @@ contract EthPoolTVL is TVL {
     IRariFundToken private rftInstance;
 
     // * Rari Fund Token constant Address
-    address private constant rftAddress =
-        0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
+    address public rftAddress = 0xCda4770d65B4211364Cb870aD6bE19E7Ef1D65f4;
 
     /// @dev load metadata api and fetch eth_pool balance
     /// @param _owner address of the contract owner
@@ -104,8 +103,8 @@ contract EthPoolTVL is TVL {
         uint256 rftTotalSupply = rftInstance.totalSupply();
         if (rftTotalSupply == 0) return 0;
         uint256 rftBalance = rftInstance.balanceOf(_account);
-        uint256 accountBalanceUSD =
-            rftBalance.mul(_fundBalance).div(rftTotalSupply);
+        uint256 accountBalanceUSD = rftBalance.mul(_fundBalance);
+        accountBalanceUSD = accountBalanceUSD.div(rftTotalSupply);
         return accountBalanceUSD;
     }
 }
