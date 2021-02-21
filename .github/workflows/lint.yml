@@ -1,4 +1,4 @@
-name: CoverageTests
+name: Lint
 
 on: [push, pull_request]
 
@@ -22,8 +22,5 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Compile
-        run: yarn compile
-
-      - name: Run unit tests with coverage
-        run: yarn coverage
+      - name: Lints with solium
+        run: yarn lint

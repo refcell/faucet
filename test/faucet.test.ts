@@ -2,7 +2,7 @@
 //@ts-ignore
 const Faucet = artifacts.require("Faucet");
 //@ts-ignore
-const EthPoolAdapter = artifacts.require("EthPoolAdapter");
+const BlankAdapter = artifacts.require("BlankAdapter");
 
 import { expect } from 'chai';
 import { shouldThrow } from '../utils';
@@ -12,7 +12,7 @@ var bnChai = require('bn-chai');
 chai.use(bnChai(BN));
 
 let faucet;
-let ethPoolAdapter;
+let blankAdapter;
 
 const rariPoolController = "0xa422890cbBE5EAa8f1c88590fBab7F319D7e24B6";
 const poolAddress = '0xD6e194aF3d9674b62D1b30Ec676030C23961275e';
@@ -23,14 +23,14 @@ const standard_uri = "https://test.com/{id}.png";
 
 // * TS ignore "contract" since it is injected by hardhat config
 // @ts-ignore
-contract("Deploy Eth Pool Faucet", (accounts) => {
+contract("Deploy Blank Faucet", (accounts) => {
   beforeEach(async () => {
-    ethPoolAdapter = await EthPoolAdapter.new({from: accounts[0]});
-    await ethPoolAdapter.initialize(accounts[0], rariPoolController);
-    let adapter_address = ethPoolAdapter.address;
+    blankAdapter = await BlankAdapter.new({from: accounts[0]});
+    await blankAdapter.initialize(accounts[0], rariPoolController);
+    let adapter_address = blankAdapter.address;
     faucet = await Faucet.new({from: accounts[0]});
     await faucet.initialize(accounts[0], standard_uri, adapter_address);
-    await ethPoolAdapter.add_approved_admin(faucet.address, {from: accounts[0]});
+    await blankAdapter.add_approved_admin(faucet.address, {from: accounts[0]});
   });
 
   // * ----------------------
@@ -42,7 +42,7 @@ contract("Deploy Eth Pool Faucet", (accounts) => {
     expect(owner).to.equal(accounts[0]);
   });
 
-  it("should be able to get the correct adapter pool address", async () => {
+  it("should be able to get the correct pool address", async () => {
     let fetched_pool_address = await faucet.get_pool_address.call({from: accounts[0]});
     expect(fetched_pool_address).to.equal(rariPoolController);
   });

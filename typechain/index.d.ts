@@ -11,12 +11,18 @@ import { IERC1155MetadataURIUpgradeableContract } from "./IERC1155MetadataURIUpg
 import { IERC1155ReceiverUpgradeableContract } from "./IERC1155ReceiverUpgradeable";
 import { IERC1155UpgradeableContract } from "./IERC1155Upgradeable";
 import { PausableUpgradeableContract } from "./PausableUpgradeable";
-import { EthPoolTVLContract } from "./EthPoolTVL";
+import { AdapterContract } from "./Adapter";
+import { TrancheSystemContract } from "./TrancheSystem";
+import { TVLContract } from "./TVL";
+import { BlankAdapterContract } from "./BlankAdapter";
+import { EthPoolAdapterContract } from "./EthPoolAdapter";
+import { FusePoolAdapterContract } from "./FusePoolAdapter";
+import { FaucetContract } from "./Faucet";
+import { IAdapterContract } from "./IAdapter";
+import { IFusePoolContract } from "./IFusePool";
 import { IRariFundManagerContract } from "./IRariFundManager";
 import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
-import { TrancheSystemContract } from "./TrancheSystem";
-import { TVLContract } from "./TVL";
 
 declare global {
   namespace Truffle {
@@ -36,12 +42,18 @@ declare global {
       ): IERC1155ReceiverUpgradeableContract;
       require(name: "IERC1155Upgradeable"): IERC1155UpgradeableContract;
       require(name: "PausableUpgradeable"): PausableUpgradeableContract;
-      require(name: "EthPoolTVL"): EthPoolTVLContract;
+      require(name: "Adapter"): AdapterContract;
+      require(name: "TrancheSystem"): TrancheSystemContract;
+      require(name: "TVL"): TVLContract;
+      require(name: "BlankAdapter"): BlankAdapterContract;
+      require(name: "EthPoolAdapter"): EthPoolAdapterContract;
+      require(name: "FusePoolAdapter"): FusePoolAdapterContract;
+      require(name: "Faucet"): FaucetContract;
+      require(name: "IAdapter"): IAdapterContract;
+      require(name: "IFusePool"): IFusePoolContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
       require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
-      require(name: "TrancheSystem"): TrancheSystemContract;
-      require(name: "TVL"): TVLContract;
     }
   }
 }
@@ -82,7 +94,21 @@ export {
   PausableUpgradeableContract,
   PausableUpgradeableInstance,
 } from "./PausableUpgradeable";
-export { EthPoolTVLContract, EthPoolTVLInstance } from "./EthPoolTVL";
+export { AdapterContract, AdapterInstance } from "./Adapter";
+export { TrancheSystemContract, TrancheSystemInstance } from "./TrancheSystem";
+export { TVLContract, TVLInstance } from "./TVL";
+export { BlankAdapterContract, BlankAdapterInstance } from "./BlankAdapter";
+export {
+  EthPoolAdapterContract,
+  EthPoolAdapterInstance,
+} from "./EthPoolAdapter";
+export {
+  FusePoolAdapterContract,
+  FusePoolAdapterInstance,
+} from "./FusePoolAdapter";
+export { FaucetContract, FaucetInstance } from "./Faucet";
+export { IAdapterContract, IAdapterInstance } from "./IAdapter";
+export { IFusePoolContract, IFusePoolInstance } from "./IFusePool";
 export {
   IRariFundManagerContract,
   IRariFundManagerInstance,
@@ -92,5 +118,3 @@ export {
   IRariFundTokenInstance,
 } from "./IRariFundToken";
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
-export { TrancheSystemContract, TrancheSystemInstance } from "./TrancheSystem";
-export { TVLContract, TVLInstance } from "./TVL";

@@ -72,11 +72,12 @@ task("deploy", "Deploys all TVL implemented contracts.")
             "Deploying an EthPoolTVL with " +
             constructorArgs.join(", ") +
             " on " +
-            hre.network.name
+            hre.network.name + " | owner: " +
+            process.env.DEPLOY_PUBLIC_KEY
         );
 
         const eth_pool_tvl = await EthPoolTVL.new(...constructorArgs);
-        let owner: any = process.env.DEV_PUBLIC_KEY ? process.env.DEV_PUBLIC_KEY : 0xd0ab35655E883Af9cD3fa164561C8aD93d427a62
+        let owner: any = process.env.DEPLOY_PUBLIC_KEY ? process.env.DEPLOY_PUBLIC_KEY : 0xd0ab35655E883Af9cD3fa164561C8aD93d427a62
         eth_pool_tvl.initialize(owner, "https://test.com/{id}.png", '0xD6e194aF3d9674b62D1b30Ec676030C23961275e');
 
         if(hre.network.name == "localhost" || hre.network.name == "development") {

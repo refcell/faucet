@@ -15,7 +15,9 @@
     "scripts-upgrade": "nodemon scripts/upgrade.ts",
     "migrations-1": "nodemon migrations/1_initial_migration.ts",
     "migrations-2": "nodemon migrations/2_deploy_tvl.ts",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "slither": "slither .",
+    "lint": "solium -f contracts/*.sol"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.4.0",
@@ -25,7 +27,8 @@
     "inquirer": "^7.3.3",
     "next": "^10.0.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "solgraph": "^0.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -64,10 +67,19 @@
     "nodemon": "^2.0.7",
     "solhint": "^3.3.2",
     "solidity-coverage": "^0.7.13",
+    "solium": "^1.2.5",
     "ts-generator": "^0.1.1",
     "ts-node": "^9.1.1",
     "typechain": "^4.0.1",
     "typescript": "^4.1.3",
     "web3": "^1.3.4"
+  },
+  "husky": {
+    "hooks": {
+      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
   }
 }

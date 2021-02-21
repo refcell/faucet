@@ -14,11 +14,12 @@ import "./TrancheSystem.sol";
 ///      Access to allow pool creators to
 ///      distribute NFT rewards
 /// ---------------------------------------
+
 abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     using SafeMathUpgradeable for uint256;
 
-    // * Default pool address
-    address internal poolAddress;
+    // * Adapter Address
+    address internal ADAPTER_CONTRACT_ADDRESS;
 
     // * Event to record rug pulls
     event RugPull(address _from);
@@ -26,13 +27,13 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     /// @dev load metadata api and instantiate ownership
     /// @param _owner address of the contract owner
     /// @param _uri base uri for initialization of erc1155
-    /// @param _pool_address address of the pool
+    /// @param _adapter_address address of the pool
     function initialize(
         address _owner,
         string memory _uri,
-        address _pool_address
+        address _adapter_address
     ) public virtual initializer {
-        poolAddress = _pool_address;
+        ADAPTER_CONTRACT_ADDRESS = _adapter_address;
         __ERC1155_init(_uri);
         __Ownable_init();
         transferOwnership(_owner);
