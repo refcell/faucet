@@ -261,6 +261,8 @@ export interface FaucetInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
+  getTotalNumberTokens(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
   get_adapter_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
   get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
@@ -347,6 +349,8 @@ export interface FaucetInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
+  maxTokenId(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
   mint_item: {
     (
       _id: number | BN | string,
@@ -373,6 +377,11 @@ export interface FaucetInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
+
+  numTokensById(
+    arg0: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<BN>;
 
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
@@ -681,6 +690,11 @@ export interface FaucetInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
+  tokenIdExists(
+    arg0: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<boolean>;
+
   transferOwnership: {
     (newOwner: string, txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -785,6 +799,8 @@ export interface FaucetInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
+    getTotalNumberTokens(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
     get_adapter_address(
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
@@ -873,6 +889,8 @@ export interface FaucetInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
 
+    maxTokenId(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
     mint_item: {
       (
         _id: number | BN | string,
@@ -899,6 +917,11 @@ export interface FaucetInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
+
+    numTokensById(
+      arg0: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
 
     owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
@@ -1205,6 +1228,11 @@ export interface FaucetInstance extends Truffle.ContractInstance {
 
     supportsInterface(
       interfaceId: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+
+    tokenIdExists(
+      arg0: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
 

@@ -18,6 +18,7 @@ import { BlankAdapterContract } from "./BlankAdapter";
 import { EthPoolAdapterContract } from "./EthPoolAdapter";
 import { FusePoolAdapterContract } from "./FusePoolAdapter";
 import { FaucetContract } from "./Faucet";
+import { FaucetFactoryContract } from "./FaucetFactory";
 import { IAdapterContract } from "./IAdapter";
 import { IFusePoolContract } from "./IFusePool";
 import { IRariFundManagerContract } from "./IRariFundManager";
@@ -49,6 +50,7 @@ declare global {
       require(name: "EthPoolAdapter"): EthPoolAdapterContract;
       require(name: "FusePoolAdapter"): FusePoolAdapterContract;
       require(name: "Faucet"): FaucetContract;
+      require(name: "FaucetFactory"): FaucetFactoryContract;
       require(name: "IAdapter"): IAdapterContract;
       require(name: "IFusePool"): IFusePoolContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
@@ -107,6 +109,7 @@ export {
   FusePoolAdapterInstance,
 } from "./FusePoolAdapter";
 export { FaucetContract, FaucetInstance } from "./Faucet";
+export { FaucetFactoryContract, FaucetFactoryInstance } from "./FaucetFactory";
 export { IAdapterContract, IAdapterInstance } from "./IAdapter";
 export { IFusePoolContract, IFusePoolInstance } from "./IFusePool";
 export {
