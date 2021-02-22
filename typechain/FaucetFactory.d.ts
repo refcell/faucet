@@ -91,6 +91,21 @@ export interface FaucetFactoryInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<{ 0: string[]; 1: BN[]; 2: BN[] }>;
 
+  initialize: {
+    (_owner: string, txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse<AllEvents>
+    >;
+    call(_owner: string, txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(
+      _owner: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _owner: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
   renounceOwnership: {
@@ -168,6 +183,24 @@ export interface FaucetFactoryInstance extends Truffle.ContractInstance {
     getFaucetsWithData(
       txDetails?: Truffle.TransactionDetails
     ): Promise<{ 0: string[]; 1: BN[]; 2: BN[] }>;
+
+    initialize: {
+      (_owner: string, txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(
+        _owner: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<void>;
+      sendTransaction(
+        _owner: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
+        _owner: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
 
     owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 

@@ -31,6 +31,13 @@ contract FaucetFactory is OwnableUpgradeable {
   /// @dev Emitted when a new Faucet is deployed.
   event FaucetDeployed(address owner, address faucet);
 
+  /// @dev Initialize OwnableUpgradeable
+  /// @param _owner address of the contract owner
+  function initialize(address _owner) public virtual initializer {
+    __Ownable_init();
+    transferOwnership(_owner);
+  }
+
   /// @dev Deploys a new Faucet contract and Registers here
   /// @param _owner the owner of the new faucet
   /// @param _uri base uri for initialization of erc1155
@@ -45,17 +52,21 @@ contract FaucetFactory is OwnableUpgradeable {
     _newFaucet.initialize(_owner, _uri, _adapter_address);
     address _faucetAddress = address(_newFaucet);
     emit FaucetDeployed(_owner, _faucetAddress);
-    _registerFaucet(_faucetAddress);
+    _registerFaucet(_faucetAddress, _owner);
     return _faucetAddress;
   }
 
   /// @dev Adds a Faucet to our directory.
   /// @param _address The address of the faucet
+  /// @param _owner The owner of the faucet
   /// @return The index of the registered Faucet
-  function _registerFaucet(address _address) internal returns (uint256) {
+  function _registerFaucet(address _address, address _owner)
+    internal
+    returns (uint256)
+  {
     require(!faucetExists[_address], "Faucet already exists in the directory.");
     faucets.push(_address);
-    faucetsByAccount[msg.sender].push(_address);
+    faucetsByAccount[_owner].push(_address);
     faucetExists[_address] = true;
     emit FaucetRegistered(faucets.length - 1, _address);
     return faucets.length - 1;
