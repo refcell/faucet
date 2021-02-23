@@ -4,6 +4,8 @@
 ![Solidity Compiling](https://github.com/abigger87/Faucet/workflows/Compile/badge.svg)
 ![Solidity Linting](https://github.com/abigger87/Faucet/workflows/Lint/badge.svg)
 
+SDK Package [faucet-sdk](https://github.com/abigger87/faucet-sdk) [![NPM](https://nodei.co/npm/faucet-sdk.png?compact=true)](https://npmjs.org/package/faucet-sdk)
+
 Fungibility-agnostic and gas-efficient token contracts for gamifying TVL.
 
 Built on top of OpenZeppelin's ERC 1155 Implementation.

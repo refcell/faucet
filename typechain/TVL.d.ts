@@ -261,6 +261,8 @@ export interface TVLInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
+  getTotalNumberTokens(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
   get_pool_share: {
     (
       _from: string,
@@ -343,6 +345,8 @@ export interface TVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
+  maxTokenId(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
   mint_item: {
     (
       _id: number | BN | string,
@@ -369,6 +373,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
+
+  numTokensById(
+    arg0: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<BN>;
 
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
@@ -641,6 +650,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
+  tokenIdExists(
+    arg0: number | BN | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<boolean>;
+
   transferOwnership: {
     (newOwner: string, txDetails?: Truffle.TransactionDetails): Promise<
       Truffle.TransactionResponse<AllEvents>
@@ -745,6 +759,8 @@ export interface TVLInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
+    getTotalNumberTokens(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
     get_pool_share: {
       (
         _from: string,
@@ -827,6 +843,8 @@ export interface TVLInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
 
+    maxTokenId(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
     mint_item: {
       (
         _id: number | BN | string,
@@ -853,6 +871,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;
     };
+
+    numTokensById(
+      arg0: number | BN | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<BN>;
 
     owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
@@ -1122,6 +1145,11 @@ export interface TVLInstance extends Truffle.ContractInstance {
 
     supportsInterface(
       interfaceId: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+
+    tokenIdExists(
+      arg0: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
 

@@ -1,4 +1,4 @@
-
+// @ts-ignore
 const Migrations = artifacts.require("Migrations");
 import { expect } from 'chai';
 var chai = require('chai');
@@ -8,6 +8,7 @@ chai.use(bnChai(BN));
 
 let migrations;
 
+// @ts-ignore
 contract("Deploy Migrations", (accounts) => {
     // * ----------------------
     // * Migrations.sol Tests

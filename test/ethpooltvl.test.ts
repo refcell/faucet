@@ -77,9 +77,9 @@ contract("Deploy Eth Pool Faucet", (accounts) => {
 
   it("creates tranche from contract owner level 1", async function () {
     // * Mint 3 items
-    await faucet.mint_item.call(1, 10, "0x1234", {from: accounts[0]});
-    await faucet.mint_item.call(2, 10, "0x1234", {from: accounts[0]});
-    await faucet.mint_item.call(3, 10, "0x1234", {from: accounts[0]});
+    await faucet.mint_item(1, 10, "0x1234", {from: accounts[0]});
+    await faucet.mint_item(2, 10, "0x1234", {from: accounts[0]});
+    await faucet.mint_item(3, 10, "0x1234", {from: accounts[0]});
     let res = await faucet.create_tranche.call(1, [1, 2, 3], standard_uri, true, {from: accounts[0]});
     expect(res.toString()).to.equal('1');
   });
