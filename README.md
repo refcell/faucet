@@ -4,7 +4,9 @@
 ![Solidity Compiling](https://github.com/abigger87/Faucet/workflows/Compile/badge.svg)
 ![Solidity Linting](https://github.com/abigger87/Faucet/workflows/Lint/badge.svg)
 
-SDK Package [faucet-sdk](https://github.com/abigger87/faucet-sdk) [![NPM](https://nodei.co/npm/faucet-sdk.png?compact=true)](https://npmjs.org/package/faucet-sdk)
+SDK Package [faucet-sdk](https://github.com/abigger87/faucet-sdk)
+
+[![NPM](https://nodei.co/npm/faucet-sdk.png?compact=true)](https://npmjs.org/package/faucet-sdk)
 
 Fungibility-agnostic and gas-efficient token contracts for gamifying TVL.
 
@@ -23,8 +25,11 @@ So, Faucet is easily extensible by creating an adapter to manage the interaction
 ### Structure
 
 <b>Base Contracts</b>: `contracts/`
+
 <b>Adapters</b>: `contracts/adapters/`
+
 <b>Interfaces</b>: `contracts/interfaces/`
+
 <b>Various Abstract Parent Contracts</b>: `contracts/abstracts/`
 
 <b>Tests</b>: `tests/`
@@ -32,7 +37,9 @@ So, Faucet is easily extensible by creating an adapter to manage the interaction
 <b>Hardhat Deployment</b>: `tasks.ts`
 
 NOTE: Scripts and Migrations are redundand
+
 <b>Migrations</b>: `migrations/`
+
 <b>Scripts</b>: `scripts/`
 
 ### Major Roadmap/TODO
