@@ -6,13 +6,14 @@ import "../abstracts/Adapter.sol";
 import "../interfaces/IFusePool.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /// ---------------------------------------
 /// @title Faucet adapter for Rari Fuse Pools
 /// @author Andreas Bigger <bigger@usc.edu>
 /// @dev ERC1155 NFTs to unlock rewards based on fuse pool TVL
 /// ---------------------------------------
-contract FusePoolAdapter is OwnableUpgradeable, Adapter {
+contract FusePoolAdapter is OwnableUpgradeable, Adapter, ReentrancyGuard {
     using SafeMathUpgradeable for uint256;
 
     // * Pool instance
@@ -42,6 +43,7 @@ contract FusePoolAdapter is OwnableUpgradeable, Adapter {
         public
         override
         onlyAdmin(msg.sender)
+        nonReentrant
         returns (address)
     {
         require(_pool_address != address(0), "Must be a valid address");

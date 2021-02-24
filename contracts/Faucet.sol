@@ -51,6 +51,7 @@ contract Faucet is TVL {
     /// @return address of new pool
     function set_pool_address(address _pool_address)
         external
+        nonReentrant
         returns (address)
     {
         require(_pool_address != address(0), "Must be a valid address");
@@ -69,6 +70,7 @@ contract Faucet is TVL {
     function set_adapter_address(address _adapter_address)
         external
         onlyOwner
+        nonReentrant
         returns (address)
     {
         require(_adapter_address != address(0), "Must be a valid address");
