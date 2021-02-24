@@ -7,13 +7,14 @@ import "../interfaces/IRariFundToken.sol";
 import "../interfaces/IRariFundManager.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /// ---------------------------------------
 /// @title Faucet adapter for Rari Eth Pool
 /// @author Andreas Bigger <bigger@usc.edu>
 /// @dev ERC1155 NFTs to unlock rewards based on eth pool TVL
 /// ---------------------------------------
-contract EthPoolAdapter is OwnableUpgradeable, Adapter {
+contract EthPoolAdapter is OwnableUpgradeable, Adapter, ReentrancyGuard {
     using SafeMathUpgradeable for uint256;
 
     // * Pool instance
@@ -44,6 +45,7 @@ contract EthPoolAdapter is OwnableUpgradeable, Adapter {
         public
         override
         onlyAdmin(msg.sender)
+        nonReentrant
         returns (address)
     {
         require(_pool_address != address(0), "Must be a valid address");
