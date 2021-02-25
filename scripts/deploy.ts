@@ -1,17 +1,35 @@
-// @ts-ignore
-let { ethers, upgrades } = require("hardhat");
+const { deployEthPoolFaucets } = require("./deployEthPoolFaucets");
+const { deployFusePoolFaucets } = require("./deployFusePoolFaucets");
+const hre = require("hardhat");
 
-async function deploy_main() {
-  // * Deploy Migrations
-  const Migrations = await ethers.getContractFactory("Migrations");
-  // const migration_instance = Migrations.new();
+const inquirer = require('inquirer');
 
-  // * Deploy TVL
-  const TVL = await ethers.getContractFactory("TVL");
-  const tvl_instance = await upgrades.deployProxy(TVL, [42]);
-  let owner = process.env.DEV_PUBLIC_KEY ? process.env.DEV_PUBLIC_KEY : 0xd0ab35655E883Af9cD3fa164561C8aD93d427a62
-  await tvl_instance.initialize(owner);
-  await tvl_instance.deployed();
-}
+inquirer
+    .prompt([
+        {
+            name: "deploy_select",
+            type: "list",
+            message: "Deploy Faucets for:",
+            choices: ["Fuse Pools!", "Eth Pool!"],
+        },
+        {
+            name: "network",
+            type: "list",
+            message: "Deploy to ",
+            choices: ["localhost", "ropsten", "mainnet"],
+        }
+    ])
+    .then(async answers => {
+        let isMainnet = answers.newtork == "mainnet" ? true : false;
+        if(answers.deploy_select == "Fuse Pools!") {
+            await deployFusePoolFaucets({ deployMainnet: isMainnet }, hre);
+        } else if (answers.deploy_select == "Eth Pool!") {
+            await deployEthPoolFaucets({ deployMainnet: isMainnet }, hre);
+        }
+    })
+    .catch(error => {
+        console.log("ERROR");
+        console.warn(error)
+    });
 
-deploy_main();
+export {}

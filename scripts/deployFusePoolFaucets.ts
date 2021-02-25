@@ -26,7 +26,7 @@ const deployFusePoolFaucets = async ({ deployMainnet }, hre) => {
 
     // * First deploy the Fuse Pool Adapter with the Fuse Pool Address
     ImportantLog("Deploying a FusePoolAdapter on " + hre.network.name + " | owner: " + process.env.DEPLOY_PUBLIC_KEY);
-    const fusePoolAdapter = await FusePoolAdapter.new(...constructorArgs);
+    const fusePoolAdapter: any = await FusePoolAdapter.new(...constructorArgs);
     fusePoolAdapter.initialize(owner, fusePoolAddress);
     checkDeployed(hre, fusePoolAdapter, constructorArgs);
 
@@ -41,6 +41,7 @@ const deployFusePoolFaucets = async ({ deployMainnet }, hre) => {
     ImportantLog("Deploying a Faucet on " + hre.network.name + " | owner: " + process.env.DEPLOY_PUBLIC_KEY);
     const new_faucet_address = await faucetFactory.deployFaucet.call(owner, faucetUri, fusePoolAdapter.address);
     await faucetFactory.deployFaucet(owner, faucetUri, fusePoolAdapter.address);
+    // @ts-ignore
     const faucet = await Faucet.at(new_faucet_address);
     checkDeployed(hre, faucet, constructorArgs);
 
@@ -49,3 +50,7 @@ const deployFusePoolFaucets = async ({ deployMainnet }, hre) => {
 }
 
 export default deployFusePoolFaucets;
+
+export {
+    deployFusePoolFaucets
+}
