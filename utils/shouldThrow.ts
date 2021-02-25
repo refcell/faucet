@@ -1,4 +1,4 @@
-async function shouldThrow(promise) {
+async function ShouldThrow(promise) {
 try {
     await promise;
     assert(true);
@@ -10,6 +10,4 @@ assert(false, "The contract did not throw.");
 
 }
 
-export {
-    shouldThrow,
-};
+export default ShouldThrow;

@@ -36,9 +36,9 @@ export interface IAdapterInstance extends Truffle.ContractInstance {
     estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
   };
 
-  get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  getPoolAddress(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
-  get_pool_share: {
+  getPoolShare: {
     (
       _from: string,
       _max_amount: number | BN | string,
@@ -89,9 +89,9 @@ export interface IAdapterInstance extends Truffle.ContractInstance {
       estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
     };
 
-    get_pool_address(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    getPoolAddress(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
-    get_pool_share: {
+    getPoolShare: {
       (
         _from: string,
         _max_amount: number | BN | string,
@@ -114,25 +114,7 @@ export interface IAdapterInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    "set_pool_address(address)": {
-      (_pool_address: string, txDetails?: Truffle.TransactionDetails): Promise<
-        Truffle.TransactionResponse<AllEvents>
-      >;
-      call(
-        _pool_address: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<string>;
-      sendTransaction(
-        _pool_address: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<string>;
-      estimateGas(
-        _pool_address: string,
-        txDetails?: Truffle.TransactionDetails
-      ): Promise<number>;
-    };
-
-    "set_pool_address(address,address)": {
+    "setPoolAddress(address,address)": {
       (
         _from: string,
         _pool_address: string,
@@ -150,6 +132,24 @@ export interface IAdapterInstance extends Truffle.ContractInstance {
       ): Promise<string>;
       estimateGas(
         _from: string,
+        _pool_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<number>;
+    };
+
+    "setPoolAddress(address)": {
+      (_pool_address: string, txDetails?: Truffle.TransactionDetails): Promise<
+        Truffle.TransactionResponse<AllEvents>
+      >;
+      call(
+        _pool_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      sendTransaction(
+        _pool_address: string,
+        txDetails?: Truffle.TransactionDetails
+      ): Promise<string>;
+      estimateGas(
         _pool_address: string,
         txDetails?: Truffle.TransactionDetails
       ): Promise<number>;

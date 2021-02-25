@@ -39,7 +39,7 @@ contract FusePoolAdapter is OwnableUpgradeable, Adapter, ReentrancyGuard {
     /// @dev Allow owner to set pool address to avoid unnecessary upgrades
     /// @param _pool_address address of the pool
     /// @return address of new pool
-    function set_pool_address(address _pool_address)
+    function setPoolAddress(address _pool_address)
         public
         override
         onlyAdmin(msg.sender)
@@ -56,7 +56,7 @@ contract FusePoolAdapter is OwnableUpgradeable, Adapter, ReentrancyGuard {
     /// @param _from address of the current user
     /// @param _max_amount the amount of a given token id
     /// @return uint256 amount of tokens to give to the user
-    function get_pool_share(address _from, uint256 _max_amount)
+    function getPoolShare(address _from, uint256 _max_amount)
         public
         override
         aboveZero(_max_amount)

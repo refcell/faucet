@@ -63,7 +63,7 @@ abstract contract Adapter is OwnableUpgradeable {
 
     /// @dev Allow owner to get the current pool address
     /// @return address of new pool
-    function get_pool_address()
+    function getPoolAddress()
         external
         view
         onlyAdmin(msg.sender)
@@ -75,7 +75,7 @@ abstract contract Adapter is OwnableUpgradeable {
     /// @dev Allow owner to add address to admins
     /// @param _new_admin address of new admin
     /// @return address of new admin
-    function add_approved_admin(address _new_admin)
+    function addApprovedAdmin(address _new_admin)
         external
         notAdmin(_new_admin)
         onlyOwner
@@ -89,7 +89,7 @@ abstract contract Adapter is OwnableUpgradeable {
     /// @dev Allow owner to remove address from admins
     /// @param _admin address of removed admin
     /// @return address of removed admin
-    function remove_approved_admin(address _admin)
+    function removeApprovedAdmin(address _admin)
         external
         onlyAdmin(_admin)
         onlyOwner
@@ -106,7 +106,7 @@ abstract contract Adapter is OwnableUpgradeable {
     /// @dev Allow owner to approve an admin
     /// @param _pool_address address of the pool
     /// @return address of new pool
-    function set_pool_address(address _pool_address)
+    function setPoolAddress(address _pool_address)
         public
         virtual
         onlyAdmin(msg.sender)
@@ -121,13 +121,13 @@ abstract contract Adapter is OwnableUpgradeable {
     /// @param _from sender if internal
     /// @param _pool_address address of the pool
     /// @return address of new pool
-    function set_pool_address(address _from, address _pool_address)
+    function setPoolAddress(address _from, address _pool_address)
         public
         onlyAdmin(msg.sender)
         onlyAdmin(_from)
         returns (address)
     {
-        return set_pool_address(_pool_address);
+        return setPoolAddress(_pool_address);
     }
 
     // TODO: IMPLEMENT IN CHILDREN
@@ -135,7 +135,7 @@ abstract contract Adapter is OwnableUpgradeable {
     /// @param _from address of the current user
     /// @param _max_amount the amount of a given token id
     /// @return uint256 amount of tokens to give to the user
-    function get_pool_share(address _from, uint256 _max_amount)
+    function getPoolShare(address _from, uint256 _max_amount)
         public
         virtual
         aboveZero(_max_amount)

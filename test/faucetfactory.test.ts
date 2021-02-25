@@ -7,7 +7,6 @@ const BlankAdapter = artifacts.require("BlankAdapter");
 const FaucetFactory = artifacts.require("FaucetFactory");
 
 import { expect } from 'chai';
-import { shouldThrow } from '../utils';
 var chai = require('chai');
 var BN = require('bn.js');
 var bnChai = require('bn-chai');
@@ -32,7 +31,7 @@ contract("Deploy Faucet Factory", (accounts) => {
     let new_faucet_address = await faucetFactory.deployFaucet.call(accounts[0], standard_uri, adapter_address);
     await faucetFactory.deployFaucet(accounts[0], standard_uri, adapter_address);
     faucet = await Faucet.at(new_faucet_address);
-    await blankAdapter.add_approved_admin(new_faucet_address, {from: accounts[0]});
+    await blankAdapter.addApprovedAdmin(new_faucet_address, {from: accounts[0]});
   });
 
   // * ----------------------
