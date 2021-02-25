@@ -1,6 +1,5 @@
 // @ts-ignore
 let { ethers, upgrades } = require("hardhat");
-const inquirer = require("inquirer")
 const fs = require('fs');
 
 async function upgrade_main(address, new_contract) {

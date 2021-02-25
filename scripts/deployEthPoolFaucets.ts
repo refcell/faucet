@@ -26,7 +26,7 @@ const deployEthPoolFaucets = async ({ deployMainnet }, hre) => {
         process.env.DEPLOY_PUBLIC_KEY
     );
 
-    const fusePoolAdapter = await FusePoolAdapter.new(...constructorArgs);
+    const fusePoolAdapter: any = await FusePoolAdapter.new(...constructorArgs);
     let owner: any = process.env.DEPLOY_PUBLIC_KEY ? process.env.DEPLOY_PUBLIC_KEY : 0xd0ab35655E883Af9cD3fa164561C8aD93d427a62
     fusePoolAdapter.initialize(owner, '0x0');
 
@@ -59,3 +59,7 @@ const deployEthPoolFaucets = async ({ deployMainnet }, hre) => {
 }
 
 export default deployEthPoolFaucets;
+
+export {
+    deployEthPoolFaucets
+}
