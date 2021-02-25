@@ -41,33 +41,33 @@ contract Faucet is TVL {
 
     /// @dev Allow owner to get the current pool address
     /// @return address of new pool
-    function get_pool_address() external view returns (address) {
-        return adapterInstance.get_pool_address();
+    function getPoolAddress() external view returns (address) {
+        return adapterInstance.getPoolAddress();
     }
 
     /// @dev Allow owner to set pool address to avoid unnecessary upgrades
     /// @dev Underlying Adapter handles permissions if msg.sender is allowed to call
     /// @param _pool_address address of the pool
     /// @return address of new pool
-    function set_pool_address(address _pool_address)
+    function setPoolAddress(address _pool_address)
         external
         nonReentrant
         returns (address)
     {
         require(_pool_address != address(0), "Must be a valid address");
-        return adapterInstance.set_pool_address(msg.sender, _pool_address);
+        return adapterInstance.setPoolAddress(msg.sender, _pool_address);
     }
 
     /// @dev Allow owner to get the current adapter address
     /// @return address of adapter
-    function get_adapter_address() external view returns (address) {
+    function getAdapterAddress() external view returns (address) {
         return ADAPTER_CONTRACT_ADDRESS;
     }
 
     /// @dev Allow owner to set adapter address to avoid unnecessary upgrades
     /// @param _adapter_address address of the adapter
     /// @return address of new adapter
-    function set_adapter_address(address _adapter_address)
+    function setAdapterAddress(address _adapter_address)
         external
         onlyOwner
         nonReentrant
@@ -83,12 +83,12 @@ contract Faucet is TVL {
     /// @param _from address of the current user
     /// @param _max_amount the amount of a given token id
     /// @return uint256 amount of tokens to give to the user
-    function get_pool_share(address _from, uint256 _max_amount)
+    function getPoolShare(address _from, uint256 _max_amount)
         public
         override
         aboveZero(_max_amount)
         returns (uint256)
     {
-        return adapterInstance.get_pool_share(_from, _max_amount);
+        return adapterInstance.getPoolShare(_from, _max_amount);
     }
 }

@@ -19,7 +19,7 @@ contract BlankAdapter is OwnableUpgradeable, Adapter {
     /// @param _from address of the current user
     /// @param _max_amount the amount of a given token id
     /// @return uint256 amount of tokens to give to the user
-    function get_pool_share(address _from, uint256 _max_amount)
+    function getPoolShare(address _from, uint256 _max_amount)
         public
         override
         aboveZero(_max_amount)

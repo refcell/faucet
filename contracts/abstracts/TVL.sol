@@ -53,7 +53,7 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     /// @param _amount: number of tokens
     /// @param _uri_data: data to be injected into uri
     /// @return minted id
-    function mint_item(
+    function mintItem(
         uint256 _id,
         uint256 _amount,
         bytes calldata _uri_data
@@ -114,7 +114,7 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
         for (uint256 id = 0; id < user_ids.length; id++) {
             uint256 max_amount = tranche_id_amounts[user_level][user_ids[id]];
             // * Calculate amount user can withdraw as % of pool TVL
-            uint256 max_allowed = get_pool_share(from, max_amount);
+            uint256 max_allowed = getPoolShare(from, max_amount);
             require(
                 amounts[id] < max_allowed,
                 "Id amounts must be less than the allowed tranche amounts."
@@ -129,7 +129,7 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     /// @param _from address of the current user
     /// @param _max_amount the amount of a given token id
     /// @return uint256 amount of tokens to give to the user
-    function get_pool_share(address _from, uint256 _max_amount)
+    function getPoolShare(address _from, uint256 _max_amount)
         public
         virtual
         returns (uint256);
@@ -191,7 +191,7 @@ abstract contract TVL is TrancheSystem, ERC1155PausableUpgradeable {
     /// @dev function set approval for redemption
     /// @param _user user's address
     /// @param _approved whether the user is approved to transfer or not
-    function set_approval(address _user, bool _approved) external onlyOwner {
+    function setApproval(address _user, bool _approved) external onlyOwner {
         // * Set approval
         setApprovalForAll(_user, _approved);
     }

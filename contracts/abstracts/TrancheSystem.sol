@@ -92,7 +92,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @param _tranche_uri tranche level uri
     /// @param _enabled whether tranche is enabled
     /// @return newly created tranche level
-    function create_tranche(
+    function createTranche(
         uint256 _level,
         uint256[] memory _ids,
         string memory _tranche_uri,
@@ -122,7 +122,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @dev function to check if tranche exists or not
     /// @param _level tranche level
     /// @return tranche uri for <_level> tranche
-    function get_tranche_exists(uint256 _level)
+    function getTrancheExists(uint256 _level)
         external
         view
         aboveZero(_level)
@@ -134,7 +134,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @dev function to get a tranche uri
     /// @param _level tranche level
     /// @return tranche uri for <_level> tranche
-    function get_tranche_uri(uint256 _level)
+    function getTrancheUri(uint256 _level)
         external
         view
         aboveZero(_level)
@@ -150,7 +150,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @param _level tranche level
     /// @param _uri tranche uri
     /// @return tranche level
-    function set_tranche_uri(uint256 _level, string memory _uri)
+    function setTrancheUri(uint256 _level, string memory _uri)
         external
         onlyOwner
         aboveZero(_level)
@@ -164,7 +164,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @dev function to get if tranche is enabled
     /// @param _level tranche level
     /// @return if tranche <_level> is enabled
-    function get_tranche_enabled(uint256 _level)
+    function getTrancheEnabled(uint256 _level)
         external
         view
         aboveZero(_level)
@@ -180,7 +180,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @param _level tranche level
     /// @param _enabled whether tranche is enabled or not
     /// @return tranche level
-    function set_tranche_enabled(uint256 _level, bool _enabled)
+    function setTrancheEnabled(uint256 _level, bool _enabled)
         external
         onlyOwner
         aboveZero(_level)
@@ -200,7 +200,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @param _level tranche level
     /// @param _id token id
     /// @return uint256 amount of token ids in the tranche
-    function get_tranche_id_amounts(uint256 _level, uint256 _id)
+    function getTrancheIdAmounts(uint256 _level, uint256 _id)
         external
         view
         aboveZero(_level)
@@ -217,7 +217,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @param _id token id
     /// @param _amount token id amount
     /// @return tranche level
-    function set_tranche_id_amounts(
+    function setTrancheIdAmounts(
         uint256 _level,
         uint256 _id,
         uint256 _amount
@@ -248,7 +248,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @dev gets tranche level _user is in
     /// @param _user address of user to be added
     /// @return tranche level
-    function get_user_tranche_level(address _user)
+    function getUserTrancheLevel(address _user)
         external
         view
         onlyOwner
@@ -261,7 +261,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @param _level tranche level
     /// @param _user address of user to be added
     /// @return tranche level
-    function set_user_tranche_level(uint256 _level, address _user)
+    function setUserTrancheLevel(uint256 _level, address _user)
         external
         onlyOwner
         aboveZero(_level)
@@ -281,7 +281,7 @@ abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
     /// @dev function to delete a tranche
     /// @param _level tranche level
     /// @return deleted tranche level
-    function delete_tranche(uint256 _level)
+    function deleteTranche(uint256 _level)
         external
         onlyOwner
         aboveZero(_level)

@@ -81,7 +81,7 @@ contract FaucetFactory is OwnableUpgradeable {
         return faucets;
     }
 
-    /// @notice Gets faucets for a given account
+    /// @notice Gets faucets for a given account created by that account.
     /// @param _from address for which we return faucets
     /// @return address
     function getAccountFaucets(address _from)

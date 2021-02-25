@@ -106,7 +106,7 @@ type AllEvents =
   | TrancheUpdate;
 
 export interface TrancheSystemInstance extends Truffle.ContractInstance {
-  create_tranche: {
+  createTranche: {
     (
       _level: number | BN | string,
       _ids: (number | BN | string)[],
@@ -137,7 +137,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  delete_tranche: {
+  deleteTranche: {
     (
       _level: number | BN | string,
       txDetails?: Truffle.TransactionDetails
@@ -156,28 +156,28 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  get_tranche_enabled(
+  getTrancheEnabled(
     _level: number | BN | string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
-  get_tranche_exists(
+  getTrancheExists(
     _level: number | BN | string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<boolean>;
 
-  get_tranche_id_amounts(
+  getTrancheIdAmounts(
     _level: number | BN | string,
     _id: number | BN | string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN>;
 
-  get_tranche_uri(
+  getTrancheUri(
     _level: number | BN | string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<string>;
 
-  get_user_tranche_level(
+  getUserTrancheLevel(
     _user: string,
     txDetails?: Truffle.TransactionDetails
   ): Promise<BN>;
@@ -193,7 +193,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
     estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
   };
 
-  set_tranche_enabled: {
+  setTrancheEnabled: {
     (
       _level: number | BN | string,
       _enabled: boolean,
@@ -216,7 +216,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  set_tranche_id_amounts: {
+  setTrancheIdAmounts: {
     (
       _level: number | BN | string,
       _id: number | BN | string,
@@ -243,7 +243,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  set_tranche_uri: {
+  setTrancheUri: {
     (
       _level: number | BN | string,
       _uri: string,
@@ -266,7 +266,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  set_user_tranche_level: {
+  setUserTrancheLevel: {
     (
       _level: number | BN | string,
       _user: string,
@@ -308,7 +308,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
   };
 
   methods: {
-    create_tranche: {
+    createTranche: {
       (
         _level: number | BN | string,
         _ids: (number | BN | string)[],
@@ -339,7 +339,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    delete_tranche: {
+    deleteTranche: {
       (
         _level: number | BN | string,
         txDetails?: Truffle.TransactionDetails
@@ -358,28 +358,28 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    get_tranche_enabled(
+    getTrancheEnabled(
       _level: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
 
-    get_tranche_exists(
+    getTrancheExists(
       _level: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
 
-    get_tranche_id_amounts(
+    getTrancheIdAmounts(
       _level: number | BN | string,
       _id: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN>;
 
-    get_tranche_uri(
+    getTrancheUri(
       _level: number | BN | string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
 
-    get_user_tranche_level(
+    getUserTrancheLevel(
       _user: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<BN>;
@@ -395,7 +395,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
       estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
     };
 
-    set_tranche_enabled: {
+    setTrancheEnabled: {
       (
         _level: number | BN | string,
         _enabled: boolean,
@@ -418,7 +418,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    set_tranche_id_amounts: {
+    setTrancheIdAmounts: {
       (
         _level: number | BN | string,
         _id: number | BN | string,
@@ -445,7 +445,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    set_tranche_uri: {
+    setTrancheUri: {
       (
         _level: number | BN | string,
         _uri: string,
@@ -468,7 +468,7 @@ export interface TrancheSystemInstance extends Truffle.ContractInstance {
       ): Promise<number>;
     };
 
-    set_user_tranche_level: {
+    setUserTrancheLevel: {
       (
         _level: number | BN | string,
         _user: string,
