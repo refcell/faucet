@@ -1,35 +1,36 @@
+// * Major Imports
+// const inquirer = require('inquirer');
+
+// * Import helper functions
 const { deployEthPoolFaucets } = require("./deployEthPoolFaucets");
 const { deployFusePoolFaucets } = require("./deployFusePoolFaucets");
-const hre = require("hardhat");
 
-const inquirer = require('inquirer');
+// * Import types
+import { DeployFunction } from 'hardhat-deploy/types';
+import {HardhatRuntimeEnvironment} from 'hardhat/types';
 
-inquirer
+const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+    const inquirer = require('inquirer');
+    inquirer
     .prompt([
         {
             name: "deploy_select",
             type: "list",
             message: "Deploy Faucets for:",
             choices: ["Fuse Pools!", "Eth Pool!"],
-        },
-        {
-            name: "network",
-            type: "list",
-            message: "Deploy to ",
-            choices: ["localhost", "ropsten", "mainnet"],
         }
     ])
     .then(async answers => {
-        let isMainnet = answers.newtork == "mainnet" ? true : false;
         if(answers.deploy_select == "Fuse Pools!") {
-            await deployFusePoolFaucets({ deployMainnet: isMainnet }, hre);
+            await deployFusePoolFaucets({ deployMainnet: false }, hre);
         } else if (answers.deploy_select == "Eth Pool!") {
-            await deployEthPoolFaucets({ deployMainnet: isMainnet }, hre);
+            await deployEthPoolFaucets({ deployMainnet: false }, hre);
         }
     })
     .catch(error => {
         console.log("ERROR");
         console.warn(error)
     });
+};
 
-export {}
+export default func;

@@ -3,10 +3,10 @@ import { ImportantLog, RetryOperation, Sleep } from ".";
 const checkDeployed = async (hre: any, myContract: any, constructorArgs: any) => {
     if(hre.network.name == "localhost" || hre.network.name == "development") {
         ImportantLog(
-        `Deployed an Fuse Pool Adapter instance at ${myContract.address} on ${hre.network.name}!`
+        `Deployed at ${myContract.address} on ${hre.network.name}!`
         );
     } else {
-        ImportantLog("Deployed! Trying to verify in 10 seconds!");
+        ImportantLog(`Deployed at ${myContract.address} on ${hre.network.name}! Trying to verify in 10 seconds!`);
 
         // Sleep for 10 seconds while Etherscan propogates.
         await Sleep(10000);

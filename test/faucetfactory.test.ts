@@ -58,6 +58,11 @@ contract("Deploy Faucet Factory", (accounts) => {
     expect(faucets.toString()).to.equal(faucet.address.toString());
   });
 
+  it("Faucet Factory should be able to get all faucets", async function () {
+    let faucets = await faucetFactory.getAllFaucets.call();
+    expect(faucets.toString()).to.equal(faucet.address.toString());
+  });
+
   it("Faucet should be recorded as existing in Faucet Factory", async function () {
     let exists = await faucetFactory.faucetExists.call(faucet.address);
     expect(exists.toString()).to.equal('true');

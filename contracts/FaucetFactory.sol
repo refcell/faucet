@@ -38,6 +38,12 @@ contract FaucetFactory is OwnableUpgradeable {
         transferOwnership(_owner);
     }
 
+    /// @dev external function to get all faucets
+    /// @return array of faucet addresses
+    function getAllFaucets() external view returns (address[] memory) {
+        return faucets;
+    }
+
     /// @dev Deploys a new Faucet contract and Registers here
     /// @param _owner the owner of the new faucet
     /// @param _uri base uri for initialization of erc1155

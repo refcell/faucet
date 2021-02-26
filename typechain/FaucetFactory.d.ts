@@ -85,6 +85,8 @@ export interface FaucetFactoryInstance extends Truffle.ContractInstance {
     txDetails?: Truffle.TransactionDetails
   ): Promise<string[]>;
 
+  getAllFaucets(txDetails?: Truffle.TransactionDetails): Promise<string[]>;
+
   getFaucets(txDetails?: Truffle.TransactionDetails): Promise<string[]>;
 
   getFaucetsWithData(
@@ -177,6 +179,8 @@ export interface FaucetFactoryInstance extends Truffle.ContractInstance {
       _from: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string[]>;
+
+    getAllFaucets(txDetails?: Truffle.TransactionDetails): Promise<string[]>;
 
     getFaucets(txDetails?: Truffle.TransactionDetails): Promise<string[]>;
 
