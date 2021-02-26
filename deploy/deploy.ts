@@ -1,6 +1,5 @@
 // * Import helper functions
-const { deployEthPoolFaucets } = require("./deployEthPoolFaucets");
-const { deployFusePoolFaucets } = require("./deployFusePoolFaucets");
+const { deployFusePoolFaucets, deployEthPoolFaucets } = require("../scripts/");
 
 // * Import types
 import { DeployFunction } from 'hardhat-deploy/types';
@@ -8,7 +7,7 @@ import {HardhatRuntimeEnvironment} from 'hardhat/types';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const inquirer = require('inquirer');
-    inquirer
+    await inquirer
     .prompt([
         {
             name: "deploy_select",

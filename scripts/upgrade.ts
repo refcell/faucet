@@ -1,32 +1,33 @@
-// @ts-ignore
-let { ethers, upgrades } = require("hardhat");
-const fs = require('fs');
+// * Import helper functions
+const { upgradeEthPoolFaucets } = require("./upgradeEthPoolFaucets");
+const { upgradeFusePoolFaucets } = require("./upgradeFusePoolFaucets");
 
-async function upgrade_main(address, new_contract) {
-    // * Upgrading
-    const upgraded_contract = await ethers.getContractFactory(new_contract);
-    await upgrades.upgradeProxy(address, upgraded_contract);
-}
+// * Import types
+import { DeployFunction } from 'hardhat-deploy/types';
+import {HardhatRuntimeEnvironment} from 'hardhat/types';
 
-fs.readdir("./contracts/", (err, files) => {
-    files.forEach(file => {
-        console.log(file);
-    });
+const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+    const inquirer = require('inquirer');
     inquirer
-        .prompt([
-            {
-                name: "address",
-                type: "input",
-                message: "What is the contract address to upgrade?",
-            },
-            {
-                name: "contract",
-                type: "list",
-                message: "Which is the upgraded contract?",
-                choices: files,
-            },
-        ])
-        .then((answer) => {
-            upgrade_main(answer.address, answer.contract);
-        });
-});
+    .prompt([
+        {
+            name: "upgrade",
+            type: "list",
+            message: "Upgrade contracts for:",
+            choices: ["Fuse Pools", "Eth Pool"],
+        }
+    ])
+    .then(async answers => {
+        if(answers.upgrade == "Fuse Pools") {
+            await upgradeFusePoolFaucets({ deployMainnet: false }, hre);
+        } else if (answers.upgrade == "Eth Pool") {
+            await upgradeEthPoolFaucets({ deployMainnet: false }, hre);
+        }
+    })
+    .catch(error => {
+        console.log("ERROR");
+        console.warn(error)
+    });
+};
+
+export default func;

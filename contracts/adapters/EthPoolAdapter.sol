@@ -7,14 +7,18 @@ import "../interfaces/IRariFundToken.sol";
 import "../interfaces/IRariFundManager.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 
 /// ---------------------------------------
 /// @title Faucet adapter for Rari Eth Pool
 /// @author Andreas Bigger <bigger@usc.edu>
 /// @dev ERC1155 NFTs to unlock rewards based on eth pool TVL
 /// ---------------------------------------
-contract EthPoolAdapter is OwnableUpgradeable, Adapter, ReentrancyGuard {
+contract EthPoolAdapter is
+    OwnableUpgradeable,
+    Adapter,
+    ReentrancyGuardUpgradeable
+{
     using SafeMathUpgradeable for uint256;
 
     // * Pool instance
