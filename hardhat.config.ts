@@ -33,7 +33,7 @@ const config: HardhatUserConfig = {
             }
         },
         fuse: {
-            url: process.env.FUSE_NET_URL,
+            url: process.env.FUSE_NET_URL ? process.env.FUSE_NET_URL : "",
             accounts: process.env.DEPLOY_PRIVATE_KEY ? [process.env.DEPLOY_PRIVATE_KEY] : undefined,
             chainId: 31337
         },
