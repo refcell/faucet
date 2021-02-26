@@ -38,5 +38,5 @@
         "**/*.png",
         "**/*.svg",
         "**/*.json"
-    ]
+, "truffle-config.js"    ]
 }

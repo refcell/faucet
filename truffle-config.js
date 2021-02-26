@@ -1,8 +1,5 @@
 const HDWalletProvider = require('truffle-hdwallet-provider')
 
-/**
- * Used for rinkeby deployments
- */
 const rinkebyProviderUrl = process.env.RINKEBY_PROVIDER_URL
 let rinkebyMnemonic = {
     seed: '',
@@ -77,6 +74,17 @@ function kovanProvider() {
     )
 }
 
+function fuseProvider() {
+    return new HDWalletProvider(
+        kovanMnemonic.seed,
+        kovanProviderUrl,
+        kovanMnemonic.accountIndex
+    )
+}
+// url: process.env.FUSE_NET_URL,
+//             accounts: process.env.DEPLOY_PRIVATE_KEY ? [process.env.DEPLOY_PRIVATE_KEY] : undefined,
+//             gasPrice: parseInt(process.env.LIVE_GAS_PRICE),
+
 module.exports = {
     networks: {
         development: {
@@ -95,6 +103,10 @@ module.exports = {
         kovan: {
             provider: kovanProvider,
             network_id: '42', // Network Id for Kovan
+        },
+        fuse: {
+            provider: fuseProvider,
+            network_id: '31337'
         },
         mainnet: {
             provider: mainnetProvider,
