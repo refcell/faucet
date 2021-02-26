@@ -1,7 +1,5 @@
-
-import { FaucetContract, FaucetFactoryInstance, FusePoolAdapterContract } from "../typechain";
-import { Sleep, ImportantLog, RetryOperation } from "../utils";
-
+import { FaucetContract, FaucetFactoryInstance, FusePoolAdapterContract } from "../../typechain";
+import { Sleep, ImportantLog, RetryOperation } from "../../utils";
 
 const deployEthPoolFaucets = async ({ deployMainnet }, hre) => {
     // * Require use of deployMainnet flag for mainnet deploys.

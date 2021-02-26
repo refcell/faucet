@@ -5,9 +5,12 @@ pragma solidity ^0.7.0;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155PausableUpgradeable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 
-abstract contract TrancheSystem is OwnableUpgradeable, ReentrancyGuard {
+abstract contract TrancheSystem is
+    OwnableUpgradeable,
+    ReentrancyGuardUpgradeable
+{
     using SafeMathUpgradeable for uint256;
     /// --------------------------------------------------------
     ///    Nominal Tranches - overridable with setTrancheLevels
