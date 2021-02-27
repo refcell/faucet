@@ -1,5 +1,4 @@
-import { FaucetFactoryContract } from "@/typechain";
-import { ImportantLog, checkDeployed, checkMainnet } from "../../utils";
+import { ImportantLog, checkDeployed, checkMainnet, getOwner } from "../../../utils";
 
 const deployFaucetFactory = async ({ deployMainnet }, hre) => {
     // * Verify Mainnet Deployment
@@ -7,10 +6,10 @@ const deployFaucetFactory = async ({ deployMainnet }, hre) => {
 
     // * Dynamic imports
     const FaucetFactory = await hre.ethers.getContractFactory("FaucetFactory");
-    const owner: any = process.env.DEPLOY_PUBLIC_KEY ? process.env.DEPLOY_PUBLIC_KEY : "0xd0ab35655E883Af9cD3fa164561C8aD93d427a62"
+    const owner = getOwner();
 
     // * Deploy FaucetFactory
-    ImportantLog("Deploying an upgradeable FaucetFactory on " + hre.network.name + " | owner: " + process.env.DEPLOY_PUBLIC_KEY);
+    ImportantLog("Deploying an upgradeable FaucetFactory on " + hre.network.name + " | owner: " + owner);
     const instance = await hre.upgrades.deployProxy(FaucetFactory, [owner], { initializer: 'initialize', unsafeAllowCustomTypes: true, unsafeAllowLinkedLibraries: true });
     checkDeployed(hre, instance, []);
 

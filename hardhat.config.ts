@@ -18,7 +18,7 @@ import { gweiToWei } from "./utils";
 import "./tasks";
 
 const config: HardhatUserConfig = {
-    // defaultNetwork: "fuse",
+    defaultNetwork: "hardhat",
     networks: {
         hardhat: {
             forking: {
@@ -88,6 +88,11 @@ const config: HardhatUserConfig = {
         coinmarketcap: process.env.COINMARKETCAP_API_KEY,
         enabled: (process.env.REPORT_GAS) ? true : false
     },
+    paths: {
+        deploy: 'deploy',
+        deployments: 'deployments',
+        imports: `imports`
+    }
 };
 
 export default config;

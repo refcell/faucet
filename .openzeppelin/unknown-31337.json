@@ -98,88 +98,6 @@
         }
       }
     },
-    "7c31b62bfb15867b510e94195f0b15a0e49c5d2adce05e686a514cb91c8a10a8": {
-      "address": "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
-      "txHash": "0xb3fb98c1800548dc27eec07fb7e7709747192b6614070b654257caa51457b34c",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "_initialized",
-            "type": "t_bool",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:25"
-          },
-          {
-            "contract": "Initializable",
-            "label": "_initializing",
-            "type": "t_bool",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:30"
-          },
-          {
-            "contract": "ContextUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:20"
-          },
-          {
-            "contract": "OwnableUpgradeable",
-            "label": "__gap",
-            "type": "t_array(t_uint256)49_storage",
-            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:74"
-          },
-          {
-            "contract": "FaucetFactory",
-            "label": "faucets",
-            "type": "t_array(t_address)dyn_storage",
-            "src": "contracts/FaucetFactory.sol:20"
-          },
-          {
-            "contract": "FaucetFactory",
-            "label": "faucetsByAccount",
-            "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
-            "src": "contracts/FaucetFactory.sol:23"
-          },
-          {
-            "contract": "FaucetFactory",
-            "label": "faucetExists",
-            "type": "t_mapping(t_address,t_bool)",
-            "src": "contracts/FaucetFactory.sol:26"
-          }
-        ],
-        "types": {
-          "t_array(t_address)dyn_storage": {
-            "label": "address[]"
-          },
-          "t_address": {
-            "label": "address"
-          },
-          "t_mapping(t_address,t_array(t_address)dyn_storage)": {
-            "label": "mapping(address => address[])"
-          },
-          "t_mapping(t_address,t_bool)": {
-            "label": "mapping(address => bool)"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          }
-        }
-      }
-    },
     "c910a492ea0abe01bc17031e13cd0d408726af8e56a7018e6dfbd975c0b22ebf": {
       "address": "0x3D06849F094a3993aDBeCce193de9de347B9B837",
       "txHash": "0xb4e050413bf2cb76778b9fefb427d5a18357671a52157ec540618dbd77c2e8d0",
@@ -261,10 +179,183 @@
           }
         }
       }
+    },
+    "03f78c37ebd903832b9841b0740227f406e7ef88b965aa41c45e4b2510a5adce": {
+      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+      "txHash": "0xa23fa608967e7a8c77e100742457b99f7a5c60ff6e387d486ce4e71e369cff23",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "Adapter",
+            "label": "approvedAdmin",
+            "type": "t_array(t_address)dyn_storage",
+            "src": "contracts/abstracts/Adapter.sol:16"
+          },
+          {
+            "contract": "Adapter",
+            "label": "POOL_ADDRESS",
+            "type": "t_address",
+            "src": "contracts/abstracts/Adapter.sol:19"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:37"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:67"
+          },
+          {
+            "contract": "FusePoolAdapter",
+            "label": "comptroller",
+            "type": "t_contract(Comptroller)5056",
+            "src": "contracts/adapters/FusePoolAdapter.sol:25"
+          }
+        ],
+        "types": {
+          "t_contract(Comptroller)5056": {
+            "label": "contract Comptroller"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "ebbc8592d2434b8af0f4f6d031f548214c046cdd6b9c53177e53d74ab67604c7": {
+      "address": "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
+      "txHash": "0x4003053d327117f8d4d257b704cc49a1b441e72f1542d34079b8ef1f3adb93e3",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "FaucetFactory",
+            "label": "faucets",
+            "type": "t_array(t_address)dyn_storage",
+            "src": "contracts/FaucetFactory.sol:20"
+          },
+          {
+            "contract": "FaucetFactory",
+            "label": "faucetsByAccount",
+            "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
+            "src": "contracts/FaucetFactory.sol:23"
+          },
+          {
+            "contract": "FaucetFactory",
+            "label": "faucetExists",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "contracts/FaucetFactory.sol:26"
+          }
+        ],
+        "types": {
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+            "label": "mapping(address => address[])"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
     }
   },
   "admin": {
-    "address": "0xc6B210A4D88a474f3100ce6A170BAfcD8eE3514b",
-    "txHash": "0xdaa34d33e5f3ca698591c32b413ffd457c912d52d858e4635f51d7ef8743fcad"
+    "address": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
+    "txHash": "0x99422e8f011b508213e06dfc87b2d432562479ef51687ec30592b1ba9ca41a14"
   }
 }
