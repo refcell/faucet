@@ -7,14 +7,14 @@ pragma solidity ^0.7.0;
 /// @notice simple interface for existing
 ///         RariFundManager contract
 /// ---------------------------------------
-contract IRariFundManager {
+interface IRariFundManager {
     /**
      * @notice Returns the fund's total investor balance (all REPT holders' funds but not unclaimed fees)
      *          of all currencies in EETH (scaled by 1e18).
      * @dev Ideally, we can add the view modifier, but Compound's `getUnderlyingBalance`
      *      function (called by `getRawFundBalance`) potentially modifies the state.
      */
-    function getEntireBalance() public returns (uint256) {}
+    function getEntireBalance() external returns (uint256);
 
     /**
      * @notice Returns an account's total balance in ETH.
@@ -22,5 +22,5 @@ contract IRariFundManager {
      *      function (called by `getRawFundBalance`) potentially modifies the state.
      * @param account The account whose balance we are calculating.
      */
-    function balanceOf(address account) external returns (uint256) {}
+    function balanceOf(address account) external returns (uint256);
 }

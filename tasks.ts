@@ -1,11 +1,18 @@
 import { task, types } from "hardhat/config";
 import { ImportantLog } from "./utils";
-import { deployFusePoolFaucets, deployEthPoolFaucets } from "./scripts";
+import { deployFusePoolFaucets, deployEthPoolFaucets, deploy, upgrade } from "./scripts";
+import { upgradeFusePoolFaucets } from "./scripts/fuse/lib";
 
-task("deploy_fuse", "Deploys all Faucets for Fuse Pools!")
-    .addOptionalParam("deployMainnet", "Must be passed for Mainnet!", false, types.boolean)
-    .setAction(deployFusePoolFaucets);
+// task("deploy", "Deploy Script")
+//     .setAction(deploy);
 
-task("deploy_eth_pool", "Deploys all Faucets for Eth Pool!")
-    .addOptionalParam("deployMainnet", "Must be passed for Mainnet!", false, types.boolean)
-    .setAction(deployEthPoolFaucets);
+// task("upgrade", "Upgrade Script").setAction(upgrade);
+
+// task("deploy_fuse", "Deploys all Faucets for Fuse Pools!")
+//     .setAction(deployFusePoolFaucets);
+
+// task("upgrade_fuse", "Upgrades Fuse Pool Faucets")
+//     .setAction(upgradeFusePoolFaucets);
+
+// task("deploy_eth_pool", "Deploys all Faucets for Eth Pool!")
+//     .setAction(deployEthPoolFaucets);

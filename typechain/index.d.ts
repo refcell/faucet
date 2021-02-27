@@ -19,8 +19,11 @@ import { EthPoolAdapterContract } from "./EthPoolAdapter";
 import { FusePoolAdapterContract } from "./FusePoolAdapter";
 import { FaucetContract } from "./Faucet";
 import { FaucetFactoryContract } from "./FaucetFactory";
+import { ComptrollerContract } from "./Comptroller";
+import { CTokenContract } from "./CToken";
+import { PriceOracleContract } from "./PriceOracle";
+import { UnitrollerContract } from "./Unitroller";
 import { IAdapterContract } from "./IAdapter";
-import { IFusePoolContract } from "./IFusePool";
 import { IRariFundManagerContract } from "./IRariFundManager";
 import { IRariFundTokenContract } from "./IRariFundToken";
 import { MigrationsContract } from "./Migrations";
@@ -51,8 +54,11 @@ declare global {
       require(name: "FusePoolAdapter"): FusePoolAdapterContract;
       require(name: "Faucet"): FaucetContract;
       require(name: "FaucetFactory"): FaucetFactoryContract;
+      require(name: "Comptroller"): ComptrollerContract;
+      require(name: "CToken"): CTokenContract;
+      require(name: "PriceOracle"): PriceOracleContract;
+      require(name: "Unitroller"): UnitrollerContract;
       require(name: "IAdapter"): IAdapterContract;
-      require(name: "IFusePool"): IFusePoolContract;
       require(name: "IRariFundManager"): IRariFundManagerContract;
       require(name: "IRariFundToken"): IRariFundTokenContract;
       require(name: "Migrations"): MigrationsContract;
@@ -110,8 +116,11 @@ export {
 } from "./FusePoolAdapter";
 export { FaucetContract, FaucetInstance } from "./Faucet";
 export { FaucetFactoryContract, FaucetFactoryInstance } from "./FaucetFactory";
+export { ComptrollerContract, ComptrollerInstance } from "./Comptroller";
+export { CTokenContract, CTokenInstance } from "./CToken";
+export { PriceOracleContract, PriceOracleInstance } from "./PriceOracle";
+export { UnitrollerContract, UnitrollerInstance } from "./Unitroller";
 export { IAdapterContract, IAdapterInstance } from "./IAdapter";
-export { IFusePoolContract, IFusePoolInstance } from "./IFusePool";
 export {
   IRariFundManagerContract,
   IRariFundManagerInstance,

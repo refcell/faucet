@@ -1,7 +1,9 @@
-// * Export defaults from task helpers
-export { deployEthPoolFaucets, deployFusePoolFaucets } from "./lib";
+// * Fuse Pools Exports
+export * from "./fuse";
 
-// * Export Upgrades
-export { default as UpgradeFaucet } from "./v2/upgradeFaucet";
-export { default as UpgradeFaucetFactory } from "./v2/upgradeFaucetFactory";
-export { default as UpgradeFusePoolAdapter } from "./v2/upgradeFusePoolAdapter";
+// * Eth Pool Exports
+export * from "./ethPool";
+
+// * Directory Level Exports
+export { default as deploy } from "./deploy";
+export { default as upgrade } from "./upgrade";

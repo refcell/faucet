@@ -1,14 +1,18 @@
 // * Import helper functions
-const { upgradeEthPoolFaucets } = require("./upgradeEthPoolFaucets");
-const { upgradeFusePoolFaucets } = require("./upgradeFusePoolFaucets");
+import { upgradeFusePoolFaucets } from "./fuse";
+import { upgradeEthPoolFaucets } from "./ethPool";
 
 // * Import types
 import { DeployFunction } from 'hardhat-deploy/types';
-import {HardhatRuntimeEnvironment} from 'hardhat/types';
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+    if(!hre || Object.keys(hre).length == 0) {
+        const myhre = require("hardhat");
+        hre = myhre;
+    }
     const inquirer = require('inquirer');
-    inquirer
+    await inquirer
     .prompt([
         {
             name: "upgrade",
@@ -19,9 +23,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     ])
     .then(async answers => {
         if(answers.upgrade == "Fuse Pools") {
-            await upgradeFusePoolFaucets({ deployMainnet: false }, hre);
+            await upgradeFusePoolFaucets(hre);
         } else if (answers.upgrade == "Eth Pool") {
-            await upgradeEthPoolFaucets({ deployMainnet: false }, hre);
+            await upgradeEthPoolFaucets(hre);
         }
     })
     .catch(error => {

@@ -1,26 +1,30 @@
 // * Import helper functions
-const { deployFusePoolFaucets, deployEthPoolFaucets } = require("../scripts/");
+import { deploy, upgrade } from '../scripts';
 
 // * Import types
 import { DeployFunction } from 'hardhat-deploy/types';
-import {HardhatRuntimeEnvironment} from 'hardhat/types';
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+    if(!hre || Object.keys(hre).length == 0) {
+        const myhre = require("hardhat");
+        hre = myhre;
+    }
     const inquirer = require('inquirer');
     await inquirer
     .prompt([
         {
-            name: "deploy_select",
+            name: "deploy",
             type: "list",
-            message: "Deploy Faucets for:",
-            choices: ["Fuse Pools!", "Eth Pool!"],
+            message: "Type of Deployment",
+            choices: ["deploy", "upgrade v2"],
         }
     ])
     .then(async answers => {
-        if(answers.deploy_select == "Fuse Pools!") {
-            await deployFusePoolFaucets({ deployMainnet: false }, hre);
-        } else if (answers.deploy_select == "Eth Pool!") {
-            await deployEthPoolFaucets({ deployMainnet: false }, hre);
+        if(answers.deploy == "deploy") {
+            await deploy(hre);
+        } else if (answers.deploy == "upgrade v2") {
+            await upgrade(hre);
         }
     })
     .catch(error => {

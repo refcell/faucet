@@ -11,8 +11,8 @@ pragma solidity ^0.7.0;
 /// @notice simple interface for existing
 ///         RariFundToken contract
 /// ---------------------------------------
-contract IRariFundToken {
-    function totalSupply() public returns (uint256) {}
+interface IRariFundToken {
+    function totalSupply() external returns (uint256);
 
-    function balanceOf(address _account) public returns (uint256) {}
+    function balanceOf(address _account) external returns (uint256);
 }
